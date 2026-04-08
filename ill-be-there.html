@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="I'll Be There">
+<meta name="apple-mobile-web-app-title" content="IBT">
 <meta name="theme-color" content="#B8712A">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <title>I'll Be There</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -26,20 +27,7 @@ html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
 
-/* ── Auth screens ──────────────────────────── */
-#authScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-.auth-card{background:var(--warm-white);border-radius:24px;padding:48px 36px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--border);}
-.auth-brand{font-family:'Playfair Display',serif;font-size:32px;font-weight:500;color:var(--amber);margin-bottom:6px;}
-.auth-brand em{font-style:italic;font-weight:400;}
-.auth-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:40px;}
-.auth-headline{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--text-primary);line-height:1.4;margin-bottom:10px;}
-.auth-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:40px;}
-.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:white;color:var(--text-primary);font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s ease;box-shadow:var(--shadow-sm);}
-.btn-google:hover{border-color:var(--amber-light);box-shadow:var(--shadow-md);transform:translateY(-1px);}
-.btn-google svg{flex-shrink:0;}
-.auth-note{font-size:11px;color:var(--text-faint);margin-top:20px;line-height:1.6;}
-
-/* Loading screen */
+/* ── Loading ───────────────────────────────── */
 #loadingScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px;}
 .loading-brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--amber);}
 .loading-brand em{font-style:italic;}
@@ -47,6 +35,43 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .loading-dots span{width:8px;height:8px;border-radius:50%;background:var(--amber-light);animation:dotpulse 1.4s ease-in-out infinite;}
 .loading-dots span:nth-child(2){animation-delay:0.2s;}
 .loading-dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes dotpulse{0%,80%,100%{transform:scale(0.5);opacity:0.3;}40%{transform:scale(1);opacity:1;}}
+
+/* ── Auth screen ───────────────────────────── */
+#authScreen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.auth-card{background:var(--warm-white);border-radius:24px;padding:48px 36px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--border);}
+.auth-brand{font-family:'Playfair Display',serif;font-size:32px;font-weight:500;color:var(--amber);margin-bottom:6px;}
+.auth-brand em{font-style:italic;font-weight:400;}
+.auth-tagline{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:36px;}
+.auth-headline{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--text-primary);line-height:1.5;margin-bottom:10px;}
+.auth-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:36px;}
+.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:white;color:var(--text-primary);font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s ease;box-shadow:var(--shadow-sm);}
+.btn-google:hover{border-color:var(--amber-light);box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.auth-note{font-size:11px;color:var(--text-faint);margin-top:20px;line-height:1.6;}
+
+/* ── API key setup screen ──────────────────── */
+#apiKeyScreen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.apikey-card{background:var(--warm-white);border-radius:24px;padding:40px 32px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);border:1px solid var(--border);}
+.apikey-brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--amber);margin-bottom:4px;}
+.apikey-brand em{font-style:italic;}
+.apikey-step{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:28px;}
+.apikey-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--text-primary);line-height:1.3;margin-bottom:10px;}
+.apikey-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:24px;}
+.apikey-howto{background:var(--amber-faint);border-radius:var(--radius-sm);padding:16px;margin-bottom:24px;border:1px solid var(--border);}
+.apikey-howto-title{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.apikey-howto ol{padding-left:18px;}
+.apikey-howto li{font-size:13px;color:var(--text-secondary);line-height:1.7;font-weight:300;}
+.apikey-howto a{color:var(--amber);text-decoration:none;}
+.apikey-input-wrap{position:relative;margin-bottom:12px;}
+.apikey-input{width:100%;background:var(--amber-faint);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 48px 14px 16px;font-family:'Jost',sans-serif;font-size:14px;color:var(--text-primary);outline:none;transition:border-color 0.2s;font-weight:300;}
+.apikey-input:focus{border-color:var(--amber-mid);box-shadow:0 0 0 3px rgba(184,113,42,0.08);}
+.apikey-input::placeholder{color:var(--text-faint);}
+.apikey-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-faint);padding:4px;}
+.apikey-toggle:hover{color:var(--amber);}
+.apikey-note{font-size:12px;color:var(--text-faint);line-height:1.6;margin-bottom:20px;}
+.apikey-note strong{color:var(--text-muted);}
+.apikey-skip{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--text-faint);cursor:pointer;margin-top:12px;text-decoration:underline;width:100%;text-align:center;}
+.apikey-skip:hover{color:var(--text-muted);}
 
 /* ── App shell ─────────────────────────────── */
 #appShell{display:none;}
@@ -60,22 +85,25 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .brand-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--amber);letter-spacing:-0.3px;line-height:1.1;}
 .brand-name em{font-style:italic;font-weight:400;}
 .brand-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);font-weight:400;margin-top:4px;}
-.date-chip{font-size:11px;color:var(--text-muted);font-weight:300;padding:5px 10px;background:var(--amber-faint);border-radius:20px;display:inline-block;margin-bottom:18px;border:1px solid var(--border);}
-
-/* User chip */
-.user-chip{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--amber-faint);border-radius:10px;margin-bottom:12px;border:1px solid var(--border);}
-.user-avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;background:var(--amber-pale);}
+.date-chip{font-size:11px;color:var(--text-muted);font-weight:300;padding:5px 10px;background:var(--amber-faint);border-radius:20px;display:inline-block;margin-bottom:14px;border:1px solid var(--border);}
+.user-chip{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--amber-faint);border-radius:10px;margin-bottom:6px;border:1px solid var(--border);}
+.user-avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;}
 .user-avatar-placeholder{width:26px;height:26px;border-radius:50%;background:var(--amber-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .user-name{font-size:12px;color:var(--text-secondary);font-weight:400;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .btn-signout{background:none;border:none;cursor:pointer;color:var(--text-faint);padding:2px;display:flex;align-items:center;transition:color 0.15s;}
 .btn-signout:hover{color:var(--rose);}
-
-/* Sync indicator */
-.sync-status{font-size:10px;color:var(--text-faint);display:flex;align-items:center;gap:5px;padding:4px 0;margin-bottom:8px;}
+.sync-status{font-size:10px;color:var(--text-faint);display:flex;align-items:center;gap:5px;padding:4px 0;margin-bottom:10px;}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--sage);flex-shrink:0;}
 .sync-dot.syncing{background:var(--amber-light);animation:pulse-soft 1s ease-in-out infinite;}
 .sync-dot.error{background:var(--rose);}
 @keyframes pulse-soft{0%,100%{opacity:0.4;}50%{opacity:1;}}
+
+/* AI key status in sidebar */
+.ai-status{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:background 0.15s;}
+.ai-status:hover{background:var(--amber-faint);}
+.ai-status-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);flex-shrink:0;}
+.ai-status-dot.missing{background:var(--rose);}
+.ai-status-text{font-size:11px;color:var(--text-muted);flex:1;}
 
 .nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
 .nav::-webkit-scrollbar{display:none;}
@@ -91,7 +119,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .panel{display:none;}
 .panel.active{display:block;animation:fadeUp 0.28s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-@keyframes dotpulse{0%,80%,100%{transform:scale(0.5);opacity:0.3;}40%{transform:scale(1);opacity:1;}}
 
 .sec-head{margin-bottom:28px;}
 .sec-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--text-primary);line-height:1.2;margin-bottom:6px;}
@@ -143,9 +170,9 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 
 /* Buttons */
 .btn-primary{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:white;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 20px rgba(184,113,42,0.3);margin-top:6px;}
-.btn-primary:hover{background:var(--brown-mid);transform:translateY(-1px);box-shadow:0 6px 24px rgba(184,113,42,0.35);}
+.btn-primary:hover{background:var(--brown-mid);transform:translateY(-1px);}
 .btn-outline{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--amber);background:transparent;color:var(--amber);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s ease;margin-bottom:16px;}
-.btn-outline:hover{background:var(--amber);color:white;box-shadow:0 4px 20px rgba(184,113,42,0.3);}
+.btn-outline:hover{background:var(--amber);color:white;}
 
 /* Reflection */
 .reflection-card{background:linear-gradient(145deg,var(--brown-deep) 0%,#5A3020 100%);border-radius:20px;padding:28px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(58,37,24,0.28);margin-bottom:16px;}
@@ -159,6 +186,13 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .dots span{width:7px;height:7px;border-radius:50%;background:var(--amber-light);animation:dotpulse 1.4s ease-in-out infinite;}
 .dots span:nth-child(2){animation-delay:0.2s;}
 .dots span:nth-child(3){animation-delay:0.4s;}
+
+/* No AI key notice */
+.no-ai-notice{background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
+.no-ai-notice svg{flex-shrink:0;margin-top:2px;opacity:0.6;}
+.no-ai-notice-text{font-size:13px;color:var(--brown-soft);line-height:1.6;font-weight:300;}
+.no-ai-notice-text strong{font-weight:500;}
+.no-ai-notice-link{color:var(--amber);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;padding:0;}
 
 /* Meals */
 .meal-entry{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--amber-faint);border-radius:10px;border:1px solid var(--border);margin-bottom:8px;}
@@ -196,7 +230,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .week-chart{display:flex;align-items:flex-end;gap:4px;height:64px;margin-bottom:8px;}
 .week-bar{flex:1;border-radius:4px 4px 0 0;background:var(--amber-faint);border:1px solid var(--border);min-height:4px;transition:height 0.4s ease;}
 .week-bar.has{background:var(--amber-pale);border-color:var(--amber-light);}
-.week-bar.today{background:var(--amber);border-color:var(--amber);}
+.week-bar.today-bar{background:var(--amber);border-color:var(--amber);}
 .week-chart-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--text-faint);letter-spacing:0.5px;text-transform:uppercase;}
 
 /* Date nav */
@@ -206,10 +240,8 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .date-nav-btn:disabled{opacity:0.25;cursor:not-allowed;}
 .date-nav-center{flex:1;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);border-right:1px solid var(--border);position:relative;}
 .date-nav-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:500;color:var(--text-primary);cursor:pointer;padding:12px 8px;text-align:center;line-height:1.2;width:100%;}
-.date-nav-label:hover{color:var(--amber);}
 .date-nav-label small{display:block;font-family:'Jost',sans-serif;font-size:10px;font-weight:400;color:var(--text-faint);letter-spacing:0.5px;margin-top:1px;}
 .date-nav-cal{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;top:0;left:0;}
-.date-nav-cal::-webkit-calendar-picker-indicator{position:absolute;width:100%;height:100%;opacity:0;cursor:pointer;}
 .past-banner{display:none;background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:10px 16px;margin-bottom:16px;font-size:13px;color:var(--brown-soft);font-weight:400;align-items:center;gap:8px;}
 .past-banner.visible{display:flex;}
 .week-nav{display:flex;align-items:center;background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-sm);}
@@ -227,6 +259,17 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 /* Toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--brown-deep);color:rgba(255,255,255,0.92);padding:11px 22px;border-radius:30px;font-size:13px;font-weight:400;opacity:0;transition:all 0.3s ease;z-index:10000;white-space:nowrap;box-shadow:var(--shadow-lg);pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Modal overlay */
+.modal-overlay{position:fixed;inset:0;background:rgba(58,37,24,0.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.visible{display:flex;}
+.modal-card{background:var(--warm-white);border-radius:24px;padding:36px 32px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--text-primary);margin-bottom:10px;}
+.modal-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:20px;}
+.modal-actions{display:flex;gap:10px;}
+.modal-actions .btn-primary{flex:1;margin-top:0;}
+.btn-ghost{flex:1;padding:15px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:transparent;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s ease;}
+.btn-ghost:hover{border-color:var(--amber-light);color:var(--text-secondary);}
 </style>
 </head>
 <body>
@@ -238,17 +281,45 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 </div>
 
 <!-- Auth -->
-<div id="authScreen" style="display:none">
+<div id="authScreen">
   <div class="auth-card">
     <div class="auth-brand">I'll <em>Be</em> There</div>
-    <div class="auth-sub">Your IBD companion</div>
+    <div class="auth-tagline">Your IBD companion</div>
     <div class="auth-headline">A steady presence<br>for uncertain days</div>
     <div class="auth-body">Track how you feel, what you eat, and how your body responds — with a warm AI reflection to help you make sense of it all.</div>
     <button class="btn-google" onclick="signInWithGoogle()">
       <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       Continue with Google
     </button>
-    <div class="auth-note">Your data is private to you and protected by your Google account.<br>Nothing is shared or sold.</div>
+    <div class="auth-note">Your data is private to you and protected by your Google account. Nothing is shared or sold.</div>
+  </div>
+</div>
+
+<!-- API Key Setup -->
+<div id="apiKeyScreen">
+  <div class="apikey-card">
+    <div class="apikey-brand">I'll <em>Be</em> There</div>
+    <div class="apikey-step">Setup — AI reflections</div>
+    <div class="apikey-title">Add your Anthropic API key to unlock reflections</div>
+    <div class="apikey-body">The daily and weekly reflections are powered by Claude AI. You'll need your own API key — it stays on your device and goes directly to Anthropic. We never see it.</div>
+    <div class="apikey-howto">
+      <div class="apikey-howto-title">How to get your key</div>
+      <ol>
+        <li>Go to <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+        <li>Sign up or log in</li>
+        <li>Go to <strong>API Keys</strong> and click <strong>Create Key</strong></li>
+        <li>Copy the key and paste it below</li>
+      </ol>
+    </div>
+    <div class="apikey-input-wrap">
+      <input type="password" class="apikey-input" id="apiKeyInput" placeholder="sk-ant-api03-…">
+      <button class="apikey-toggle" onclick="toggleKeyVisibility()" id="keyToggle">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <div class="apikey-note">Your key is stored only in your browser's local storage. It is sent <strong>directly to Anthropic</strong> when you request a reflection — never to any other server.</div>
+    <button class="btn-primary" onclick="saveApiKey()" style="margin-top:0">Save and continue</button>
+    <button class="apikey-skip" onclick="skipApiKey()">Skip for now — I'll add it later</button>
   </div>
 </div>
 
@@ -262,17 +333,22 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
     </div>
     <div class="date-chip" id="dateChip"></div>
     <div class="user-chip" id="userChip">
-      <div class="user-avatar-placeholder">
+      <div class="user-avatar-placeholder" id="userAvatarWrap">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8712A" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
-      <span class="user-name" id="userName">Loading…</span>
+      <span class="user-name" id="userName">…</span>
       <button class="btn-signout" onclick="signOut()" title="Sign out">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </button>
     </div>
-    <div class="sync-status" id="syncStatus">
+    <div class="sync-status">
       <div class="sync-dot" id="syncDot"></div>
       <span id="syncText">Synced</span>
+    </div>
+    <div class="ai-status" onclick="showApiKeyModal()" id="aiStatusChip">
+      <div class="ai-status-dot" id="aiStatusDot"></div>
+      <span class="ai-status-text" id="aiStatusText">AI reflections active</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
     </div>
     <div class="nav">
       <button class="nav-item active" onclick="showPanel('today')" id="tab-today">
@@ -452,18 +528,65 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 </div>
 </div>
 
+<!-- API Key Modal (update key) -->
+<div class="modal-overlay" id="apiKeyModal">
+  <div class="modal-card">
+    <div class="modal-title">API Key Settings</div>
+    <div class="modal-body">Update or remove your Anthropic API key. Your key is stored only in this browser and sent directly to Anthropic when you request a reflection.</div>
+    <div class="apikey-input-wrap" style="margin-bottom:12px">
+      <input type="password" class="apikey-input" id="apiKeyModalInput" placeholder="sk-ant-api03-…">
+      <button class="apikey-toggle" onclick="toggleModalKeyVisibility()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeApiKeyModal()">Cancel</button>
+      <button class="btn-primary" onclick="updateApiKey()" style="margin-top:0">Save key</button>
+    </div>
+    <button class="apikey-skip" onclick="removeApiKey()" style="margin-top:16px;color:var(--rose)">Remove key and disable AI</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ── Supabase config ───────────────────────────────────
+// ── Config ────────────────────────────────────────────
 const SUPABASE_URL='https://cjqdbzeqcvimieqqtipd.supabase.co';
 const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqcWRiemVxY3ZpbWllcXF0aXBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDQ5NzgsImV4cCI6MjA5MTIyMDk3OH0.YvKdPIPBW9VDSge39v53DUjgGG6Qz7693KlYmoBEuFA';
 
+// ── Locked system prompt — cannot be overridden by users ──
+const IBD_SYSTEM_PROMPT=`You are the voice of "I'll Be There" — a warm, honest, deeply human health companion for someone living with inflammatory bowel disease (IBD), specifically Crohn's disease or ulcerative colitis.
+
+YOUR SOLE PURPOSE is to help the user understand their IBD symptoms, food triggers, emotional wellbeing, and day-to-day experience of living with a chronic gut condition. You reflect back logged data with warmth and clinical awareness.
+
+STRICT BOUNDARIES — you must refuse any request outside this purpose:
+- Do not answer general knowledge questions unrelated to IBD or gut health
+- Do not write code, essays, poems, or any content unrelated to the user's health
+- Do not roleplay as any other assistant or persona
+- Do not provide specific medication dosing advice or replace clinical consultation
+- If asked anything outside IBD health support, respond warmly but firmly: "I'm here specifically to support your IBD journey — I'm not able to help with that, but I'm here if you want to talk about how you're feeling or what you've noticed today."
+
+YOUR VOICE:
+- Warm, honest, calm — like a trusted friend who deeply understands IBD
+- Never hollow or generic — always specific to what the person has shared
+- Acknowledge emotional reality alongside physical data
+- Never alarmist, never dismissive
+- When something warrants clinical attention, say so clearly but calmly
+- Always respect that the person knows their own body
+
+NEVER replace a gastroenterologist. Always position your reflections as personal insight to help the user have better conversations with their clinical team.`;
+
 // ── Supabase helpers ──────────────────────────────────
 let currentSession=null;
+let currentUserId=null;
 
 async function sbFetch(path,opts={}){
-  const headers={'Content-Type':'application/json','apikey':SUPABASE_ANON,'Authorization':'Bearer '+(currentSession?.access_token||SUPABASE_ANON),...(opts.headers||{})};
+  const headers={
+    'Content-Type':'application/json',
+    'apikey':SUPABASE_ANON,
+    'Authorization':'Bearer '+(currentSession?.access_token||SUPABASE_ANON),
+    ...(opts.headers||{})
+  };
   const res=await fetch(SUPABASE_URL+path,{...opts,headers});
   if(!res.ok){const e=await res.text();throw new Error(e);}
   const text=await res.text();
@@ -472,7 +595,6 @@ async function sbFetch(path,opts={}){
 
 // ── Auth ──────────────────────────────────────────────
 async function getSession(){
-  // Check URL hash for OAuth callback tokens
   const hash=window.location.hash;
   if(hash.includes('access_token')){
     const params=new URLSearchParams(hash.slice(1));
@@ -485,18 +607,26 @@ async function getSession(){
       return currentSession;
     }
   }
-  // Try stored session
   const stored=localStorage.getItem('ibt_session');
   if(stored){
     try{
       const s=JSON.parse(stored);
-      // Verify token still valid by fetching user
-      const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+s.access_token}});
+      const res=await fetch(SUPABASE_URL+'/auth/v1/user',{
+        headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+s.access_token}
+      });
       if(res.ok){currentSession=s;return s;}
-      // Try refresh
       if(s.refresh_token){
-        const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON},body:JSON.stringify({refresh_token:s.refresh_token})});
-        if(r.ok){const ns=await r.json();currentSession={access_token:ns.access_token,refresh_token:ns.refresh_token};localStorage.setItem('ibt_session',JSON.stringify(currentSession));return currentSession;}
+        const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON},
+          body:JSON.stringify({refresh_token:s.refresh_token})
+        });
+        if(r.ok){
+          const ns=await r.json();
+          currentSession={access_token:ns.access_token,refresh_token:ns.refresh_token};
+          localStorage.setItem('ibt_session',JSON.stringify(currentSession));
+          return currentSession;
+        }
       }
     }catch(e){}
     localStorage.removeItem('ibt_session');
@@ -507,7 +637,9 @@ async function getSession(){
 async function getUser(){
   if(!currentSession)return null;
   try{
-    const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+currentSession.access_token}});
+    const res=await fetch(SUPABASE_URL+'/auth/v1/user',{
+      headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+currentSession.access_token}
+    });
     if(res.ok)return await res.json();
   }catch(e){}
   return null;
@@ -520,47 +652,110 @@ function signInWithGoogle(){
 
 async function signOut(){
   try{await sbFetch('/auth/v1/logout',{method:'POST'});}catch(e){}
-  currentSession=null;
+  currentSession=null;currentUserId=null;
   localStorage.removeItem('ibt_session');
   document.getElementById('appShell').style.display='none';
   document.getElementById('authScreen').style.display='flex';
+}
+
+// ── API Key management ────────────────────────────────
+function getApiKey(){return localStorage.getItem('ibt_api_key')||'';}
+function hasApiKey(){return!!getApiKey();}
+
+function updateAiStatusChip(){
+  const dot=document.getElementById('aiStatusDot');
+  const text=document.getElementById('aiStatusText');
+  if(hasApiKey()){
+    dot.className='ai-status-dot';
+    text.textContent='AI reflections active';
+  }else{
+    dot.className='ai-status-dot missing';
+    text.textContent='Add API key for reflections';
+  }
+}
+
+function saveApiKey(){
+  const val=document.getElementById('apiKeyInput').value.trim();
+  if(!val||!val.startsWith('sk-ant')){showToast('Please enter a valid Anthropic key');return;}
+  localStorage.setItem('ibt_api_key',val);
+  document.getElementById('apiKeyScreen').style.display='none';
+  document.getElementById('appShell').style.display='block';
+  updateAiStatusChip();
+  showToast('API key saved');
+}
+
+function skipApiKey(){
+  document.getElementById('apiKeyScreen').style.display='none';
+  document.getElementById('appShell').style.display='block';
+  updateAiStatusChip();
+}
+
+function showApiKeyModal(){
+  const existing=getApiKey();
+  document.getElementById('apiKeyModalInput').value=existing;
+  document.getElementById('apiKeyModal').classList.add('visible');
+}
+
+function closeApiKeyModal(){
+  document.getElementById('apiKeyModal').classList.remove('visible');
+}
+
+function updateApiKey(){
+  const val=document.getElementById('apiKeyModalInput').value.trim();
+  if(!val||!val.startsWith('sk-ant')){showToast('Please enter a valid Anthropic key');return;}
+  localStorage.setItem('ibt_api_key',val);
+  closeApiKeyModal();
+  updateAiStatusChip();
+  showToast('API key updated');
+}
+
+function removeApiKey(){
+  localStorage.removeItem('ibt_api_key');
+  closeApiKeyModal();
+  updateAiStatusChip();
+  showToast('API key removed');
+}
+
+function toggleKeyVisibility(){
+  const inp=document.getElementById('apiKeyInput');
+  inp.type=inp.type==='password'?'text':'password';
+}
+
+function toggleModalKeyVisibility(){
+  const inp=document.getElementById('apiKeyModalInput');
+  inp.type=inp.type==='password'?'text':'password';
 }
 
 // ── Data sync ─────────────────────────────────────────
 let syncTimer=null;
 const localCache={};
 
-async function loadEntry(date){
-  // Try cache first
-  if(localCache[date])return localCache[date];
-  // Try localStorage
-  const ls=localStorage.getItem('ibt_'+date);
-  if(ls){try{localCache[date]=JSON.parse(ls);return localCache[date];}catch(e){}}
-  return null;
-}
-
-async function saveEntry(date,data){
-  // Always write locally first (offline support)
-  localCache[date]=data;
-  localStorage.setItem('ibt_'+date,JSON.stringify(data));
-  // Debounced cloud sync
-  clearTimeout(syncTimer);
-  setSyncStatus('syncing');
-  syncTimer=setTimeout(()=>syncToCloud(date,data),1200);
-}
-
 async function syncToCloud(date,data){
-  if(!currentSession)return;
+  if(!currentSession||!currentUserId)return;
   try{
     await sbFetch('/rest/v1/entries',{
       method:'POST',
       headers:{'Prefer':'resolution=merge-duplicates'},
-      body:JSON.stringify({date,data,updated_at:new Date().toISOString()})
+      body:JSON.stringify({
+        user_id:currentUserId,
+        date,
+        data,
+        updated_at:new Date().toISOString()
+      })
     });
     setSyncStatus('synced');
   }catch(e){
+    console.error('Sync error:',e);
     setSyncStatus('error');
   }
+}
+
+async function saveEntry(date,data){
+  localCache[date]=data;
+  localStorage.setItem('ibt_'+date,JSON.stringify(data));
+  clearTimeout(syncTimer);
+  setSyncStatus('syncing');
+  syncTimer=setTimeout(()=>syncToCloud(date,data),1200);
 }
 
 async function fetchCloudEntry(date){
@@ -568,19 +763,22 @@ async function fetchCloudEntry(date){
   try{
     const rows=await sbFetch(`/rest/v1/entries?date=eq.${date}&select=data`);
     if(rows&&rows.length){
-      localCache[date]=rows[0].data;
-      localStorage.setItem('ibt_'+date,JSON.stringify(rows[0].data));
-      return rows[0].data;
+      const d=rows[0].data;
+      localCache[date]=d;
+      localStorage.setItem('ibt_'+date,JSON.stringify(d));
+      return d;
     }
   }catch(e){}
   return null;
 }
 
 async function loadEntryWithCloud(date){
-  // Always check cloud for freshest data when online
   const cloud=await fetchCloudEntry(date);
   if(cloud)return cloud;
-  return loadEntry(date);
+  if(localCache[date])return localCache[date];
+  const ls=localStorage.getItem('ibt_'+date);
+  if(ls){try{return JSON.parse(ls);}catch(e){}}
+  return null;
 }
 
 function setSyncStatus(status){
@@ -637,33 +835,51 @@ const realTodayKey=()=>new Date().toISOString().slice(0,10);
 let viewingDate=realTodayKey();
 let weekOffset=0;
 let state={bristol:null,bristolNotes:'',symptoms:[],severity:5,symptomNotes:'',meals:[],mood:null,anxiety:3,feelingsNotes:'',reflection:null};
-
 function isViewingToday(){return viewingDate===realTodayKey();}
 
 // ── Boot ──────────────────────────────────────────────
 async function boot(){
+  // Fix PWA 404: if launched from home screen at root, redirect to this file
+  if(window.location.pathname==='/'){
+    window.location.replace('./ill-be-there.html');
+    return;
+  }
+
   const session=await getSession();
   document.getElementById('loadingScreen').style.display='none';
+
   if(!session){
     document.getElementById('authScreen').style.display='flex';
     return;
   }
+
   const user=await getUser();
-  document.getElementById('appShell').style.display='block';
   if(user){
+    currentUserId=user.id;
     const name=user.user_metadata?.full_name||user.email||'You';
     document.getElementById('userName').textContent=name.split(' ')[0];
     const avatar=user.user_metadata?.avatar_url;
     if(avatar){
       const img=document.createElement('img');
       img.src=avatar;img.className='user-avatar';
-      document.getElementById('userChip').replaceChild(img,document.getElementById('userChip').firstElementChild);
+      document.getElementById('userAvatarWrap').replaceWith(img);
     }
   }
+
+  // Check if API key has been set up before
+  const apiKeySetupDone=localStorage.getItem('ibt_api_setup_done');
+  if(!apiKeySetupDone){
+    localStorage.setItem('ibt_api_setup_done','1');
+    document.getElementById('apiKeyScreen').style.display='flex';
+  } else {
+    document.getElementById('appShell').style.display='block';
+  }
+
   buildBristol();buildSymptoms();buildMoods();
-  setDate();
+  setDate();updateAiStatusChip();
   await loadStateForDate(viewingDate);
   renderMeals();renderWeek();updateToday();updateDayNav();
+
   document.getElementById('mealInput').addEventListener('keydown',e=>{
     if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();addMeal();}
   });
@@ -712,8 +928,7 @@ function dateLabel(key){
 
 function updateDayNav(){
   const lbl=dateLabel(viewingDate);
-  const labelEl=document.getElementById('dayLabel');
-  labelEl.childNodes[0].textContent=lbl.main;
+  document.getElementById('dayLabel').childNodes[0].textContent=lbl.main;
   document.getElementById('dayLabelSub').textContent=lbl.sub;
   document.getElementById('dayPicker').value=viewingDate;
   document.getElementById('dayPicker').max=realTodayKey();
@@ -724,9 +939,9 @@ function updateDayNav(){
 async function shiftDay(dir){
   const d=new Date(viewingDate+'T12:00:00');
   d.setDate(d.getDate()+dir);
-  const newKey=d.toISOString().slice(0,10);
-  if(newKey>realTodayKey())return;
-  viewingDate=newKey;
+  const k=d.toISOString().slice(0,10);
+  if(k>realTodayKey())return;
+  viewingDate=k;
   await loadStateForDate(viewingDate);
   updateDayNav();updateToday();syncTabsToDate();
 }
@@ -775,10 +990,11 @@ async function saveState(){
   await saveEntry(viewingDate,{...state});
 }
 
-function getDay(offset){const d=new Date();d.setDate(d.getDate()-offset);return d.toISOString().slice(0,10);}
-
 async function loadDay(k){
-  return await loadEntry(k);
+  if(localCache[k])return localCache[k];
+  const ls=localStorage.getItem('ibt_'+k);
+  if(ls){try{const d=JSON.parse(ls);localCache[k]=d;return d;}catch(e){}}
+  return await fetchCloudEntry(k);
 }
 
 // ── Navigation ────────────────────────────────────────
@@ -792,26 +1008,19 @@ function showPanel(name){
   if(name==='week')renderWeek();
 }
 
-// ── Bristol ───────────────────────────────────────────
-function selectBristol(n){
-  document.querySelectorAll('.bristol-item').forEach(e=>e.classList.remove('selected'));
-  document.getElementById('bristol-'+n).classList.add('selected');
-  state.bristol=n;
-}
+// ── Trackers ──────────────────────────────────────────
+function selectBristol(n){document.querySelectorAll('.bristol-item').forEach(e=>e.classList.remove('selected'));document.getElementById('bristol-'+n).classList.add('selected');state.bristol=n;}
 async function saveBristol(){state.bristolNotes=document.getElementById('bristolNotes').value;await saveState();showToast('Bristol saved');updateToday();}
 
-// ── Symptoms ──────────────────────────────────────────
 function toggleSymptom(el,name){
   el.classList.toggle('selected');
   if(el.classList.contains('selected')){if(!state.symptoms.includes(name))state.symptoms.push(name);}
   else{state.symptoms=state.symptoms.filter(s=>s!==name);}
-  const hasReal=state.symptoms.length&&!state.symptoms.every(s=>s==='No symptoms');
-  document.getElementById('severitySection').classList.toggle('visible',hasReal);
+  document.getElementById('severitySection').classList.toggle('visible',state.symptoms.length&&!state.symptoms.every(s=>s==='No symptoms'));
 }
 function updateSev(v){document.getElementById('sevVal').textContent=v;state.severity=parseInt(v);const p=((v-1)/9*100).toFixed(0)+'%';document.getElementById('sevSlider').style.setProperty('--val',p);document.getElementById('sevSlider').value=v;}
 async function saveSymptoms(){state.symptomNotes=document.getElementById('symptomNotes').value;await saveState();showToast('Symptoms saved');updateToday();}
 
-// ── Food ──────────────────────────────────────────────
 async function addMeal(){
   const inp=document.getElementById('mealInput'),t=inp.value.trim();
   if(!t)return;
@@ -819,16 +1028,21 @@ async function addMeal(){
   state.meals.push({text:t,time});inp.value='';await saveState();renderMeals();updateToday();
 }
 function renderMeals(){
-  const el=document.getElementById('mealsList');
-  el.innerHTML=state.meals.map(m=>`<div class="meal-entry"><div class="meal-text">${m.text}</div><div class="meal-time">${m.time}</div></div>`).join('');
+  document.getElementById('mealsList').innerHTML=state.meals.map(m=>`<div class="meal-entry"><div class="meal-text">${m.text}</div><div class="meal-time">${m.time}</div></div>`).join('');
 }
 
-// ── Feelings ──────────────────────────────────────────
 function selectMood(k,el){document.querySelectorAll('.mood-item').forEach(m=>m.classList.remove('selected'));el.classList.add('selected');state.mood=k;}
 function updateAnx(v){document.getElementById('anxVal').textContent=v;state.anxiety=parseInt(v);const p=(v/10*100).toFixed(0)+'%';document.getElementById('anxSlider').style.setProperty('--val',p);document.getElementById('anxSlider').value=v;}
 async function saveFeelings(){state.feelingsNotes=document.getElementById('feelingsNotes').value;await saveState();showToast('Feelings saved');updateToday();}
 
-// ── Today ─────────────────────────────────────────────
+// ── Today panel ───────────────────────────────────────
+function noAiNotice(){
+  return`<div class="no-ai-notice">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div class="no-ai-notice-text"><strong>AI reflections need an API key.</strong> <button class="no-ai-notice-link" onclick="showApiKeyModal()">Add your Anthropic key</button> to unlock daily and weekly reflections.</div>
+  </div>`;
+}
+
 function updateToday(){
   const content=document.getElementById('todayContent');
   const reflBtn=document.getElementById('reflBtn');
@@ -843,7 +1057,8 @@ function updateToday(){
   if(!hasData){
     content.innerHTML=`<div class="summary-empty"><svg class="empty-icon" viewBox="0 0 64 64" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round"><circle cx="32" cy="32" r="28"/><path d="M20 38s3-4 12-4 12 4 12 4" opacity="0.4"/><circle cx="22" cy="26" r="2" fill="#C4A882"/><circle cx="42" cy="26" r="2" fill="#C4A882"/></svg><div class="empty-text">${isPast?'Nothing was logged on this day.':'Nothing logged today yet.<br>Use the tabs to start building your picture.'}</div></div>`;
     reflBtn.style.display='none';reflCard.style.display='none';
-    sub.textContent=isPast?'No entries found for this date.':'Log across the tabs and come back here for your daily picture.';return;
+    sub.textContent=isPast?'No entries for this date.':'Log across the tabs and come back here for your daily picture.';
+    return;
   }
 
   sub.textContent=isPast?`Entry from ${lbl.main}.`:"Here's what you've recorded today.";
@@ -857,14 +1072,18 @@ function updateToday(){
   if(state.reflection){
     reflBtn.style.display='none';reflCard.style.display='block';
     document.getElementById('reflContent').innerHTML=`<div class="reflection-text">${state.reflection}</div>`;
-  }else if(isViewingToday()&&hasData){reflBtn.style.display='block';reflCard.style.display='none';}
-  else{reflBtn.style.display='none';reflCard.style.display='none';}
+  }else if(isViewingToday()&&hasData){
+    if(!hasApiKey()){content.innerHTML+=noAiNotice();reflBtn.style.display='none';}
+    else{reflBtn.style.display='block';}
+    reflCard.style.display='none';
+  }else{
+    reflBtn.style.display='none';reflCard.style.display='none';
+  }
 }
 
 // ── Weekly wrap ───────────────────────────────────────
 function shiftWeek(dir){
-  weekOffset+=dir;
-  if(weekOffset>0)weekOffset=0;
+  weekOffset+=dir;if(weekOffset>0)weekOffset=0;
   document.getElementById('weekNext').disabled=weekOffset>=0;
   document.getElementById('weekReflCard').style.display='none';
   document.getElementById('weekReflBtn').style.display='block';
@@ -873,60 +1092,75 @@ function shiftWeek(dir){
 
 async function renderWeek(){
   const today=new Date(),todayStr=realTodayKey();
-  const endDate=new Date(today);
-  endDate.setDate(endDate.getDate()+(weekOffset*7));
+  const endDate=new Date(today);endDate.setDate(endDate.getDate()+(weekOffset*7));
   if(endDate>today)endDate.setTime(today.getTime());
-
   const week=await Promise.all(Array.from({length:7},async(_,i)=>{
     const d=new Date(endDate);d.setDate(d.getDate()-(6-i));
     const key=d.toISOString().slice(0,10);
     return{key,dayName:d.toLocaleDateString('en-AU',{weekday:'short'}),dayNum:d.getDate(),data:await loadDay(key),isToday:key===todayStr};
   }));
-
   const startD=new Date(endDate);startD.setDate(startD.getDate()-6);
   const weekLabel=weekOffset===0?'This week':weekOffset===-1?'Last week':`${Math.abs(weekOffset)} weeks ago`;
-  const weekSub=`${startD.toLocaleDateString('en-AU',{day:'numeric',month:'short'})} – ${endDate.toLocaleDateString('en-AU',{day:'numeric',month:'short'})}`;
   document.getElementById('weekNavLabel').childNodes[0].textContent=weekLabel;
-  document.getElementById('weekNavSub').textContent=weekSub;
-
+  document.getElementById('weekNavSub').textContent=`${startD.toLocaleDateString('en-AU',{day:'numeric',month:'short'})} – ${endDate.toLocaleDateString('en-AU',{day:'numeric',month:'short'})}`;
   document.getElementById('weekGrid').innerHTML=week.map(w=>`<div class="week-day"><div class="week-day-label">${w.dayName}</div><div class="week-day-dot ${w.isToday?'today':w.data?'has':''}">${w.dayNum}</div></div>`).join('');
-
   const withData=week.filter(w=>w.data);
   const avgAnx=withData.length?(withData.reduce((a,w)=>a+(w.data.anxiety||0),0)/withData.length).toFixed(1):'—';
   const sxDays=withData.filter(w=>w.data.symptoms?.length&&!w.data.symptoms.every(s=>s==='No symptoms'));
   const avgSev=sxDays.length?(sxDays.reduce((a,w)=>a+(w.data.severity||0),0)/sxDays.length).toFixed(1):'—';
   const clearDays=withData.filter(w=>w.data.symptoms?.includes('No symptoms')).length;
-
   document.getElementById('weekStats').innerHTML=`
     <div class="week-stat"><div class="week-stat-num">${withData.length}</div><div class="week-stat-label">Days logged</div></div>
     <div class="week-stat"><div class="week-stat-num">${clearDays}</div><div class="week-stat-label">Clear days</div></div>
     <div class="week-stat"><div class="week-stat-num">${avgSev}</div><div class="week-stat-label">Avg intensity</div></div>
     <div class="week-stat"><div class="week-stat-num">${avgAnx}</div><div class="week-stat-label">Avg anxiety</div></div>`;
-
   document.getElementById('weekChart').innerHTML=week.map(w=>{
     const sev=w.data?.severity||0;const has=!!w.data;
-    return`<div class="week-bar ${w.isToday?'today':has?'has':''}" style="height:${has?Math.max(8,(sev/10)*100):8}%"></div>`;
+    return`<div class="week-bar ${w.isToday?'today-bar':has?'has':''}" style="height:${has?Math.max(8,(sev/10)*100):8}%"></div>`;
   }).join('');
   document.getElementById('weekChartLabels').innerHTML=week.map(w=>`<span>${w.dayName}</span>`).join('');
 }
 
-// ── Reflections ───────────────────────────────────────
+// ── AI Reflections ────────────────────────────────────
+async function callAI(userContent,maxTokens=1000){
+  const key=getApiKey();
+  if(!key)throw new Error('no_key');
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:maxTokens,
+      system:IBD_SYSTEM_PROMPT,
+      messages:[{role:'user',content:userContent}]
+    })
+  });
+  if(!res.ok){
+    const e=await res.json();
+    if(res.status===401)throw new Error('invalid_key');
+    throw new Error(e.error?.message||'api_error');
+  }
+  const data=await res.json();
+  return data.content?.[0]?.text||'';
+}
+
 async function getReflection(){
   const card=document.getElementById('reflCard'),btn=document.getElementById('reflBtn'),cont=document.getElementById('reflContent');
   btn.style.display='none';card.style.display='block';
   cont.innerHTML=`<div class="loading-pulse"><div class="dots"><span></span><span></span><span></span></div>Thinking about your day…</div>`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:1000,
-      system:`You are the voice of "I'll Be There" — a warm, honest, deeply human companion for someone living with Crohn's disease. You speak like a trusted friend who genuinely understands IBD — not a clinician, not a wellness app. You are calm, direct, and never offer hollow reassurance. Reflect back what the person has logged today so they feel genuinely seen, notice anything worth paying attention to, and leave feeling steadier. 3–5 sentences. One calm paragraph. No lists, no headers. End with something that feels like a quiet hand on the shoulder.`,
-      messages:[{role:'user',content:buildPrompt()}]
-    })});
-    const data=await res.json();
-    const text=data.content?.[0]?.text||"Couldn't connect — try again in a moment.";
+    const text=await callAI(`Here is what I've logged today:\n\n${buildPrompt()}\n\nPlease give me my daily reflection.`);
     state.reflection=text;await saveState();
     cont.innerHTML=`<div class="reflection-text">${text}</div>`;
   }catch(e){
-    cont.innerHTML=`<div class="reflection-text" style="opacity:0.6">Couldn't connect right now — check your signal and try again.</div>`;
+    if(e.message==='no_key'){cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Add an API key to unlock reflections.</div>`;}
+    else if(e.message==='invalid_key'){cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Your API key doesn't seem to be valid — check it in settings.</div>`;}
+    else{cont.innerHTML=`<div class="reflection-text" style="opacity:0.6">Couldn't connect right now — try again in a moment.</div>`;}
     btn.style.display='block';card.style.display='none';
   }
 }
@@ -937,11 +1171,16 @@ function buildPrompt(){
   if(state.bristol!==null)p.push(`Bristol: ${bristolNames[state.bristol]}${state.bristolNotes?'. '+state.bristolNotes:''}`);
   if(state.symptoms.length)p.push(`Symptoms: ${state.symptoms.join(', ')}${state.symptoms.some(s=>s!=='No symptoms')?`. Intensity: ${state.severity}/10`:''}${state.symptomNotes?'. '+state.symptomNotes:''}`);
   if(state.mood)p.push(`Mood: ${state.mood}. Anxiety: ${state.anxiety}/10${state.feelingsNotes?`. "${state.feelingsNotes}"`:''}`);
-  return`Here is what I've logged today:\n\n${p.join('\n')}\n\nPlease give me my reflection.`;
+  return p.join('\n');
 }
 
 async function getWeekReflection(){
   const card=document.getElementById('weekReflCard'),btn=document.getElementById('weekReflBtn'),cont=document.getElementById('weekReflContent');
+  if(!hasApiKey()){
+    btn.style.display='none';card.style.display='block';
+    cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Add an API key to unlock weekly reflections. <button class="no-ai-notice-link" onclick="showApiKeyModal()">Add key</button></div>`;
+    return;
+  }
   btn.style.display='none';card.style.display='block';
   cont.innerHTML=`<div class="loading-pulse"><div class="dots"><span></span><span></span><span></span></div>Looking across your week…</div>`;
   const today=new Date();
@@ -963,13 +1202,8 @@ async function getWeekReflection(){
     return`${w.day}:\n${p.join('\n')}`;
   }).join('\n\n');
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:1200,
-      system:`You are the voice of "I'll Be There" — a warm, honest companion for someone living with Crohn's disease. Give a weekly reflection: thoughtful, noticing patterns between food, mood, symptoms and gut behaviour. Be honest and calm. If something warrants attention, name it without alarm. If it was a good week, say so genuinely. 4–6 sentences, one paragraph, no lists, no headers. End with a quiet orientation toward the week ahead.`,
-      messages:[{role:'user',content:`Here is my week:\n\n${summary}\n\nPlease give me my weekly reflection.`}]
-    })});
-    const data=await res.json();
-    cont.innerHTML=`<div class="reflection-text">${data.content?.[0]?.text||"Couldn't connect."}</div>`;
+    const text=await callAI(`Here is my week:\n\n${summary}\n\nPlease give me my weekly reflection.`,1200);
+    cont.innerHTML=`<div class="reflection-text">${text}</div>`;
   }catch(e){
     cont.innerHTML=`<div class="reflection-text" style="opacity:0.6">Couldn't connect — try again in a moment.</div>`;
     btn.style.display='block';card.style.display='none';

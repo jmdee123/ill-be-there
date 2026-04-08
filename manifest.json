@@ -1,0 +1,24 @@
+{
+  "name": "I'll Be There",
+  "short_name": "IBT",
+  "description": "Your personal IBD companion",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F3EC",
+  "theme_color": "#B8712A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

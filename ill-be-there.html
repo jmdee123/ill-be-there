@@ -19,15 +19,16 @@
   --text-primary:#261A10;--text-secondary:#5C3D22;--text-muted:#9B7A60;--text-faint:#C4A882;
   --border:rgba(184,113,42,0.12);--border-mid:rgba(184,113,42,0.22);
   --shadow-sm:0 1px 8px rgba(58,37,24,0.06);--shadow-md:0 4px 20px rgba(58,37,24,0.09);
-  --shadow-lg:0 8px 40px rgba(58,37,24,0.12);
-  --sage:#6B8C72;--sage-pale:#E4EDE6;--rose:#A85B5B;--radius:18px;--radius-sm:12px;
+  --shadow-lg:0 8px 40px rgba(58,37,24,0.14);
+  --sage:#6B8C72;--sage-pale:#E4EDE6;--rose:#A85B5B;--rose-pale:#F5EDED;
+  --radius:18px;--radius-sm:12px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
 
-/* ── Loading ───────────────────────────────── */
+/* ── Loading ─────────────────────── */
 #loadingScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:16px;}
 .loading-brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--amber);}
 .loading-brand em{font-style:italic;}
@@ -37,19 +38,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .loading-dots span:nth-child(3){animation-delay:0.4s;}
 @keyframes dotpulse{0%,80%,100%{transform:scale(0.5);opacity:0.3;}40%{transform:scale(1);opacity:1;}}
 
-/* ── Auth screen ───────────────────────────── */
+/* ── Auth ────────────────────────── */
 #authScreen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .auth-card{background:var(--warm-white);border-radius:24px;padding:48px 36px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--border);}
 .auth-brand{font-family:'Playfair Display',serif;font-size:32px;font-weight:500;color:var(--amber);margin-bottom:6px;}
-.auth-brand em{font-style:italic;font-weight:400;}
+.auth-brand em{font-style:italic;}
 .auth-tagline{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:36px;}
 .auth-headline{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--text-primary);line-height:1.5;margin-bottom:10px;}
 .auth-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:36px;}
-.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:white;color:var(--text-primary);font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s ease;box-shadow:var(--shadow-sm);}
+.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:white;color:var(--text-primary);font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow-sm);}
 .btn-google:hover{border-color:var(--amber-light);box-shadow:var(--shadow-md);transform:translateY(-1px);}
 .auth-note{font-size:11px;color:var(--text-faint);margin-top:20px;line-height:1.6;}
 
-/* ── API key setup screen ──────────────────── */
+/* ── API Key screen ──────────────── */
 #apiKeyScreen{display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .apikey-card{background:var(--warm-white);border-radius:24px;padding:40px 32px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);border:1px solid var(--border);}
 .apikey-brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--amber);margin-bottom:4px;}
@@ -69,18 +70,35 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .apikey-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-faint);padding:4px;}
 .apikey-toggle:hover{color:var(--amber);}
 .apikey-note{font-size:12px;color:var(--text-faint);line-height:1.6;margin-bottom:20px;}
-.apikey-note strong{color:var(--text-muted);}
 .apikey-skip{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--text-faint);cursor:pointer;margin-top:12px;text-decoration:underline;width:100%;text-align:center;}
-.apikey-skip:hover{color:var(--text-muted);}
 
-/* ── App shell ─────────────────────────────── */
+/* ── App shell ───────────────────── */
 #appShell{display:none;}
 .app-shell{display:flex;flex-direction:column;min-height:100vh;}
 @media(min-width:768px){.app-shell{flex-direction:row;}}
 
-/* Sidebar */
-.sidebar{background:var(--warm-white);border-bottom:1px solid var(--border);padding:28px 20px 16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm);}
-@media(min-width:768px){.sidebar{width:224px;min-height:100vh;border-bottom:none;border-right:1px solid var(--border);padding:44px 24px;display:flex;flex-direction:column;box-shadow:var(--shadow-md);}}
+/* ── Mobile top bar ──────────────── */
+.mobile-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--warm-white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);}
+@media(min-width:768px){.mobile-topbar{display:none;}}
+.topbar-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;color:var(--amber);}
+.topbar-brand em{font-style:italic;font-weight:400;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.topbar-sync{font-size:10px;color:var(--text-faint);display:flex;align-items:center;gap:4px;}
+.hamburger{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px;display:flex;align-items:center;transition:color 0.15s;}
+.hamburger:hover{color:var(--amber);}
+
+/* ── Drawer overlay ──────────────── */
+.drawer-overlay{position:fixed;inset:0;background:rgba(58,37,24,0.4);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+
+/* ── Sidebar / Drawer ────────────── */
+.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;background:var(--warm-white);border-right:1px solid var(--border);padding:44px 24px;display:flex;flex-direction:column;z-index:400;transform:translateX(-100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);box-shadow:var(--shadow-lg);overflow-y:auto;}
+.sidebar.open{transform:translateX(0);}
+@media(min-width:768px){.sidebar{position:sticky;top:0;transform:none;height:100vh;box-shadow:var(--shadow-md);overflow-y:auto;}}
+.sidebar-close{display:flex;justify-content:flex-end;margin-bottom:16px;}
+@media(min-width:768px){.sidebar-close{display:none;}}
+.close-btn{background:none;border:none;cursor:pointer;color:var(--text-faint);padding:4px;}
+.close-btn:hover{color:var(--amber);}
 .brand{margin-bottom:16px;}
 .brand-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--amber);letter-spacing:-0.3px;line-height:1.1;}
 .brand-name em{font-style:italic;font-weight:400;}
@@ -92,49 +110,48 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .user-name{font-size:12px;color:var(--text-secondary);font-weight:400;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .btn-signout{background:none;border:none;cursor:pointer;color:var(--text-faint);padding:2px;display:flex;align-items:center;transition:color 0.15s;}
 .btn-signout:hover{color:var(--rose);}
-.sync-status{font-size:10px;color:var(--text-faint);display:flex;align-items:center;gap:5px;padding:4px 0;margin-bottom:10px;}
+.sync-status{font-size:10px;color:var(--text-faint);display:flex;align-items:center;gap:5px;padding:4px 0;margin-bottom:8px;}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:var(--sage);flex-shrink:0;}
 .sync-dot.syncing{background:var(--amber-light);animation:pulse-soft 1s ease-in-out infinite;}
 .sync-dot.error{background:var(--rose);}
 @keyframes pulse-soft{0%,100%{opacity:0.4;}50%{opacity:1;}}
-
-/* AI key status in sidebar */
 .ai-status{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:background 0.15s;}
 .ai-status:hover{background:var(--amber-faint);}
 .ai-status-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);flex-shrink:0;}
 .ai-status-dot.missing{background:var(--rose);}
 .ai-status-text{font-size:11px;color:var(--text-muted);flex:1;}
-
-.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
-.nav::-webkit-scrollbar{display:none;}
-@media(min-width:768px){.nav{flex-direction:column;overflow-x:visible;flex:1;}}
-.nav-item{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:10px;border:none;background:transparent;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:13px;font-weight:400;cursor:pointer;transition:all 0.2s ease;white-space:nowrap;letter-spacing:0.2px;}
+.nav{display:flex;flex-direction:column;gap:2px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;border:none;background:transparent;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:14px;font-weight:400;cursor:pointer;transition:all 0.2s;letter-spacing:0.2px;text-align:left;width:100%;}
 .nav-item:hover:not(.active){background:var(--amber-faint);color:var(--text-secondary);}
 .nav-item.active{background:var(--amber-pale);color:var(--amber);font-weight:500;}
-@media(min-width:768px){.nav-item{padding:11px 14px;font-size:14px;}}
+.nav-divider{height:1px;background:var(--border);margin:8px 0;}
+.nav-item.danger{color:var(--rose);}
+.nav-item.danger:hover{background:var(--rose-pale);}
 
-/* Content */
+/* ── Content ─────────────────────── */
 .content{flex:1;padding:28px 20px 60px;max-width:680px;margin:0 auto;width:100%;}
-@media(min-width:768px){.content{padding:48px 48px 60px;}}
+@media(min-width:768px){.content{padding:48px 48px 60px;margin-left:224px;}}
 .panel{display:none;}
 .panel.active{display:block;animation:fadeUp 0.28s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
+/* ── Common components ───────────── */
 .sec-head{margin-bottom:28px;}
 .sec-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--text-primary);line-height:1.2;margin-bottom:6px;}
 .sec-sub{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.6;}
-
 .card{background:var(--warm-white);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);box-shadow:var(--shadow-sm);}
 .card-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 .card-label::after{content:'';flex:1;height:1px;background:var(--border);}
-
 textarea,input[type="text"]{width:100%;background:var(--amber-faint);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;font-family:'Jost',sans-serif;font-size:15px;color:var(--text-primary);resize:none;outline:none;transition:border-color 0.2s,box-shadow 0.2s;line-height:1.6;font-weight:300;}
 textarea:focus,input[type="text"]:focus{border-color:var(--amber-mid);box-shadow:0 0 0 3px rgba(184,113,42,0.08);background:var(--warm-white);}
 textarea::placeholder,input::placeholder{color:var(--text-faint);font-weight:300;}
+.field-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px;margin-top:20px;}
+.severity-section{display:none;}
+.severity-section.visible{display:block;}
 
 /* Bristol */
 .bristol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
-.bristol-item{border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--amber-faint);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease;padding:14px 6px 10px;gap:6px;text-align:center;}
+.bristol-item{border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--amber-faint);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;padding:14px 6px 10px;gap:6px;text-align:center;}
 .bristol-item:hover{border-color:var(--amber-mid);background:var(--amber-pale);transform:translateY(-2px);box-shadow:var(--shadow-md);}
 .bristol-item.selected{border-color:var(--amber);background:var(--amber-pale);box-shadow:0 0 0 3px rgba(184,113,42,0.12),var(--shadow-md);transform:translateY(-2px);}
 .bristol-num{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--amber);line-height:1;}
@@ -144,14 +161,14 @@ textarea::placeholder,input::placeholder{color:var(--text-faint);font-weight:300
 
 /* Chips */
 .symptom-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
-.chip{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:30px;border:1.5px solid var(--border-mid);background:var(--amber-faint);color:var(--text-secondary);font-family:'Jost',sans-serif;font-size:13px;font-weight:400;cursor:pointer;transition:all 0.18s ease;user-select:none;}
+.chip{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:30px;border:1.5px solid var(--border-mid);background:var(--amber-faint);color:var(--text-secondary);font-family:'Jost',sans-serif;font-size:13px;font-weight:400;cursor:pointer;transition:all 0.18s;user-select:none;}
 .chip:hover{border-color:var(--amber-light);background:var(--amber-pale);transform:translateY(-1px);}
 .chip.selected{background:var(--amber);border-color:var(--amber);color:white;font-weight:500;box-shadow:0 3px 12px rgba(184,113,42,0.28);}
 
 /* Sliders */
 .slider-wrap{margin-top:16px;}
 .slider-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.slider-label{font-size:12px;font-weight:500;color:var(--text-muted);letter-spacing:0.3px;}
+.slider-label{font-size:12px;font-weight:500;color:var(--text-muted);}
 .slider-val{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--amber);}
 input[type="range"]{-webkit-appearance:none;width:100%;height:3px;border-radius:2px;outline:none;cursor:pointer;}
 input[type="range"].amber-range{background:linear-gradient(to right,var(--amber) 0%,var(--amber) var(--val,50%),var(--border-mid) var(--val,50%),var(--border-mid) 100%);}
@@ -162,17 +179,21 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 
 /* Mood */
 .mood-row{display:flex;gap:8px;margin-bottom:20px;}
-.mood-item{flex:1;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--amber-faint);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s ease;padding:14px 4px 10px;gap:6px;}
-.mood-item:hover{border-color:var(--amber-light);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
-.mood-item.selected{border-color:var(--amber);background:var(--amber-pale);box-shadow:0 0 0 3px rgba(184,113,42,0.1),var(--shadow-sm);transform:translateY(-2px);}
+.mood-item{flex:1;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--amber-faint);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;padding:14px 4px 10px;gap:6px;}
+.mood-item:hover{border-color:var(--amber-light);transform:translateY(-2px);}
+.mood-item.selected{border-color:var(--amber);background:var(--amber-pale);box-shadow:0 0 0 3px rgba(184,113,42,0.1);transform:translateY(-2px);}
 .mood-label{font-size:10px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-faint);}
 .mood-item.selected .mood-label{color:var(--brown-soft);}
 
 /* Buttons */
-.btn-primary{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:white;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 20px rgba(184,113,42,0.3);margin-top:6px;}
+.btn-primary{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:white;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 20px rgba(184,113,42,0.3);margin-top:6px;}
 .btn-primary:hover{background:var(--brown-mid);transform:translateY(-1px);}
-.btn-outline{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--amber);background:transparent;color:var(--amber);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s ease;margin-bottom:16px;}
+.btn-outline{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--amber);background:transparent;color:var(--amber);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;margin-bottom:16px;}
 .btn-outline:hover{background:var(--amber);color:white;}
+.btn-danger{width:100%;padding:15px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--rose);background:transparent;color:var(--rose);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.btn-danger:hover{background:var(--rose);color:white;}
+.btn-ghost{flex:1;padding:15px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:transparent;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.btn-ghost:hover{border-color:var(--amber-light);color:var(--text-secondary);}
 
 /* Reflection */
 .reflection-card{background:linear-gradient(145deg,var(--brown-deep) 0%,#5A3020 100%);border-radius:20px;padding:28px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(58,37,24,0.28);margin-bottom:16px;}
@@ -180,19 +201,12 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .reflection-card::after{content:'';position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;border-radius:50%;background:rgba(184,113,42,0.07);}
 .reflection-eyebrow{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--amber-light);margin-bottom:14px;position:relative;z-index:1;display:flex;align-items:center;gap:8px;}
 .reflection-eyebrow::after{content:'';flex:1;height:1px;background:rgba(184,113,42,0.3);}
-.reflection-text{font-family:'Playfair Display',serif;font-size:16px;color:rgba(255,255,255,0.9);line-height:1.8;font-weight:400;position:relative;z-index:1;}
+.reflection-text{font-family:'Playfair Display',serif;font-size:16px;color:rgba(255,255,255,0.9);line-height:1.85;font-weight:400;position:relative;z-index:1;}
 .loading-pulse{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.5);font-size:13px;position:relative;z-index:1;}
 .dots{display:flex;gap:5px;}
 .dots span{width:7px;height:7px;border-radius:50%;background:var(--amber-light);animation:dotpulse 1.4s ease-in-out infinite;}
 .dots span:nth-child(2){animation-delay:0.2s;}
 .dots span:nth-child(3){animation-delay:0.4s;}
-
-/* No AI key notice */
-.no-ai-notice{background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
-.no-ai-notice svg{flex-shrink:0;margin-top:2px;opacity:0.6;}
-.no-ai-notice-text{font-size:13px;color:var(--brown-soft);line-height:1.6;font-weight:300;}
-.no-ai-notice-text strong{font-weight:500;}
-.no-ai-notice-link{color:var(--amber);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;padding:0;}
 
 /* Meals */
 .meal-entry{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--amber-faint);border-radius:10px;border:1px solid var(--border);margin-bottom:8px;}
@@ -200,7 +214,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .meal-time{font-size:11px;color:var(--text-faint);white-space:nowrap;margin-top:2px;}
 .add-meal-row{display:flex;gap:10px;align-items:flex-end;}
 .add-meal-row textarea{flex:1;}
-.btn-add{padding:0 18px;height:52px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:white;cursor:pointer;transition:all 0.18s ease;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(184,113,42,0.28);}
+.btn-add{padding:0 18px;height:52px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:white;cursor:pointer;transition:all 0.18s;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(184,113,42,0.28);}
 .btn-add:hover{background:var(--brown-mid);transform:scale(1.04);}
 
 /* Summary */
@@ -215,6 +229,11 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .metric{display:inline-flex;align-items:baseline;gap:3px;font-size:13px;color:var(--text-muted);}
 .metric strong{font-family:'Playfair Display',serif;font-size:20px;color:var(--amber);font-weight:500;}
 
+/* No AI notice */
+.no-ai-notice{background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px;}
+.no-ai-notice-text{font-size:13px;color:var(--brown-soft);line-height:1.6;font-weight:300;}
+.no-ai-link{color:var(--amber);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;padding:0;}
+
 /* Weekly */
 .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:4px;}
 .week-day{display:flex;flex-direction:column;align-items:center;gap:4px;}
@@ -228,39 +247,42 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .week-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--amber);line-height:1;margin-bottom:4px;}
 .week-stat-label{font-size:10px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-faint);}
 .week-chart{display:flex;align-items:flex-end;gap:4px;height:64px;margin-bottom:8px;}
-.week-bar{flex:1;border-radius:4px 4px 0 0;background:var(--amber-faint);border:1px solid var(--border);min-height:4px;transition:height 0.4s ease;}
+.week-bar{flex:1;border-radius:4px 4px 0 0;background:var(--amber-faint);border:1px solid var(--border);min-height:4px;transition:height 0.4s;}
 .week-bar.has{background:var(--amber-pale);border-color:var(--amber-light);}
 .week-bar.today-bar{background:var(--amber);border-color:var(--amber);}
 .week-chart-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--text-faint);letter-spacing:0.5px;text-transform:uppercase;}
 
 /* Date nav */
 .date-nav{display:flex;align-items:center;background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:24px;overflow:hidden;box-shadow:var(--shadow-sm);}
-.date-nav-btn{flex-shrink:0;width:44px;height:44px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s ease;}
+.date-nav-btn{flex-shrink:0;width:44px;height:44px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;}
 .date-nav-btn:hover{background:var(--amber-faint);color:var(--amber);}
 .date-nav-btn:disabled{opacity:0.25;cursor:not-allowed;}
 .date-nav-center{flex:1;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);border-right:1px solid var(--border);position:relative;}
 .date-nav-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:500;color:var(--text-primary);cursor:pointer;padding:12px 8px;text-align:center;line-height:1.2;width:100%;}
 .date-nav-label small{display:block;font-family:'Jost',sans-serif;font-size:10px;font-weight:400;color:var(--text-faint);letter-spacing:0.5px;margin-top:1px;}
 .date-nav-cal{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;top:0;left:0;}
-.past-banner{display:none;background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:10px 16px;margin-bottom:16px;font-size:13px;color:var(--brown-soft);font-weight:400;align-items:center;gap:8px;}
+.past-banner{display:none;background:var(--amber-faint);border:1px solid var(--amber-pale);border-radius:var(--radius-sm);padding:10px 16px;margin-bottom:16px;font-size:13px;color:var(--brown-soft);align-items:center;gap:8px;}
 .past-banner.visible{display:flex;}
 .week-nav{display:flex;align-items:center;background:var(--warm-white);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-sm);}
-.week-nav-btn{flex-shrink:0;width:44px;height:44px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s ease;}
+.week-nav-btn{flex-shrink:0;width:44px;height:44px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;}
 .week-nav-btn:hover{background:var(--amber-faint);color:var(--amber);}
 .week-nav-btn:disabled{opacity:0.25;cursor:not-allowed;}
 .week-nav-label{flex:1;text-align:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:500;color:var(--text-primary);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:12px 8px;line-height:1.2;}
 .week-nav-label small{display:block;font-family:'Jost',sans-serif;font-size:10px;font-weight:400;color:var(--text-faint);letter-spacing:0.5px;margin-top:1px;}
 
-/* Fields */
-.field-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px;margin-top:20px;}
-.severity-section{display:none;}
-.severity-section.visible{display:block;}
+/* Settings panel */
+.settings-section{margin-bottom:28px;}
+.settings-section-title{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.settings-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--warm-white);border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:8px;}
+.settings-row-label{font-size:14px;color:var(--text-secondary);font-weight:400;}
+.settings-row-sub{font-size:12px;color:var(--text-faint);margin-top:2px;font-weight:300;}
+.settings-row-action{font-size:13px;color:var(--amber);font-weight:500;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;}
+.delete-zone{background:var(--rose-pale);border:1px solid rgba(168,91,91,0.2);border-radius:var(--radius);padding:20px;margin-top:8px;}
+.delete-zone-title{font-size:13px;font-weight:500;color:var(--rose);margin-bottom:6px;}
+.delete-zone-body{font-size:13px;color:var(--rose);font-weight:300;line-height:1.6;margin-bottom:16px;opacity:0.8;}
 
-/* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--brown-deep);color:rgba(255,255,255,0.92);padding:11px 22px;border-radius:30px;font-size:13px;font-weight:400;opacity:0;transition:all 0.3s ease;z-index:10000;white-space:nowrap;box-shadow:var(--shadow-lg);pointer-events:none;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* Modal overlay */
+/* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(58,37,24,0.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
 .modal-overlay.visible{display:flex;}
 .modal-card{background:var(--warm-white);border-radius:24px;padding:36px 32px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);}
@@ -268,8 +290,19 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 .modal-body{font-size:14px;color:var(--text-muted);font-weight:300;line-height:1.7;margin-bottom:20px;}
 .modal-actions{display:flex;gap:10px;}
 .modal-actions .btn-primary{flex:1;margin-top:0;}
-.btn-ghost{flex:1;padding:15px;border-radius:var(--radius-sm);border:1.5px solid var(--border-mid);background:transparent;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s ease;}
-.btn-ghost:hover{border-color:var(--amber-light);color:var(--text-secondary);}
+.modal-input{width:100%;background:var(--rose-pale);border:1.5px solid rgba(168,91,91,0.3);border-radius:var(--radius-sm);padding:14px 16px;font-family:'Jost',sans-serif;font-size:15px;color:var(--rose);outline:none;transition:border-color 0.2s;margin-bottom:16px;text-align:center;letter-spacing:2px;font-weight:500;}
+.modal-input:focus{border-color:var(--rose);}
+.modal-input::placeholder{color:rgba(168,91,91,0.4);letter-spacing:0;}
+
+/* Toast */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--brown-deep);color:rgba(255,255,255,0.92);padding:11px 22px;border-radius:30px;font-size:13px;font-weight:400;opacity:0;transition:all 0.3s;z-index:10000;white-space:nowrap;box-shadow:var(--shadow-lg);pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Refresh btn */
+.refresh-btn{background:none;border:none;cursor:pointer;color:var(--text-faint);padding:4px;display:flex;align-items:center;transition:color 0.15s;}
+.refresh-btn:hover{color:var(--amber);}
+.refresh-btn.spinning svg{animation:spin 0.8s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
@@ -301,32 +334,54 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
     <div class="apikey-brand">I'll <em>Be</em> There</div>
     <div class="apikey-step">Setup — AI reflections</div>
     <div class="apikey-title">Add your Anthropic API key to unlock reflections</div>
-    <div class="apikey-body">The daily and weekly reflections are powered by Claude AI. You'll need your own API key — it stays on your device and goes directly to Anthropic. We never see it.</div>
+    <div class="apikey-body">The daily and weekly reflections are powered by Claude AI. Add your own key — it syncs securely to your account so it works on every device you log in from.</div>
     <div class="apikey-howto">
       <div class="apikey-howto-title">How to get your key</div>
       <ol>
         <li>Go to <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
-        <li>Sign up or log in</li>
-        <li>Go to <strong>API Keys</strong> and click <strong>Create Key</strong></li>
-        <li>Copy the key and paste it below</li>
+        <li>Sign up or log in, then go to <strong>API Keys</strong></li>
+        <li>Click <strong>Create Key</strong>, copy it, paste below</li>
       </ol>
     </div>
     <div class="apikey-input-wrap">
       <input type="password" class="apikey-input" id="apiKeyInput" placeholder="sk-ant-api03-…">
-      <button class="apikey-toggle" onclick="toggleKeyVisibility()" id="keyToggle">
+      <button class="apikey-toggle" onclick="toggleKeyVis('apiKeyInput')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
-    <div class="apikey-note">Your key is stored only in your browser's local storage. It is sent <strong>directly to Anthropic</strong> when you request a reflection — never to any other server.</div>
+    <div class="apikey-note">Your key is encrypted and stored against your account — it syncs across all your devices automatically.</div>
     <button class="btn-primary" onclick="saveApiKey()" style="margin-top:0">Save and continue</button>
-    <button class="apikey-skip" onclick="skipApiKey()">Skip for now — I'll add it later</button>
+    <button class="apikey-skip" onclick="skipApiKey()">Skip for now — I'll add it in Settings later</button>
   </div>
 </div>
 
 <!-- App -->
 <div id="appShell">
 <div class="app-shell">
-  <nav class="sidebar">
+
+  <!-- Drawer overlay -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+  <!-- Mobile top bar -->
+  <div class="mobile-topbar">
+    <div class="topbar-brand">I'll <em>Be</em> There</div>
+    <div class="topbar-right">
+      <div class="topbar-sync" id="topbarSync">
+        <div class="sync-dot" id="topSyncDot"></div>
+      </div>
+      <button class="hamburger" onclick="openDrawer()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-close">
+      <button class="close-btn" onclick="closeDrawer()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
     <div class="brand">
       <div class="brand-name">I'll <em>Be</em> There</div>
       <div class="brand-sub">Your IBD companion</div>
@@ -344,36 +399,43 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
     <div class="sync-status">
       <div class="sync-dot" id="syncDot"></div>
       <span id="syncText">Synced</span>
+      <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()" title="Refresh from cloud" style="margin-left:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </button>
     </div>
-    <div class="ai-status" onclick="showApiKeyModal()" id="aiStatusChip">
+    <div class="ai-status" onclick="showPanel('settings');closeDrawer()" id="aiStatusChip">
       <div class="ai-status-dot" id="aiStatusDot"></div>
       <span class="ai-status-text" id="aiStatusText">AI reflections active</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
     </div>
     <div class="nav">
-      <button class="nav-item active" onclick="showPanel('today')" id="tab-today">
+      <button class="nav-item active" onclick="navTo('today')" id="tab-today">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         Today
       </button>
-      <button class="nav-item" onclick="showPanel('food')" id="tab-food">
+      <button class="nav-item" onclick="navTo('food')" id="tab-food">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
         Food Log
       </button>
-      <button class="nav-item" onclick="showPanel('bristol')" id="tab-bristol">
+      <button class="nav-item" onclick="navTo('bristol')" id="tab-bristol">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
         Bristol
       </button>
-      <button class="nav-item" onclick="showPanel('symptoms')" id="tab-symptoms">
+      <button class="nav-item" onclick="navTo('symptoms')" id="tab-symptoms">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         Symptoms
       </button>
-      <button class="nav-item" onclick="showPanel('feelings')" id="tab-feelings">
+      <button class="nav-item" onclick="navTo('feelings')" id="tab-feelings">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Feelings
       </button>
-      <button class="nav-item" onclick="showPanel('week')" id="tab-week">
+      <button class="nav-item" onclick="navTo('week')" id="tab-week">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Weekly Wrap
+      </button>
+      <div class="nav-divider"></div>
+      <button class="nav-item" onclick="navTo('settings')" id="tab-settings">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Settings
       </button>
     </div>
   </nav>
@@ -384,7 +446,7 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
     <div class="panel active" id="panel-today">
       <div class="sec-head">
         <div class="sec-title" id="todayTitle">How are you today?</div>
-        <div class="sec-sub" id="todaySub">Log across the tabs and come back here for your daily picture.</div>
+        <div class="sec-sub" id="todaySub">Log across the menu and come back here for your daily picture.</div>
       </div>
       <div class="date-nav">
         <button class="date-nav-btn" id="dayPrev" onclick="shiftDay(-1)">
@@ -524,26 +586,78 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
       </div>
     </div>
 
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="sec-head">
+        <div class="sec-title">Settings</div>
+        <div class="sec-sub">Manage your account, AI key, and preferences.</div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">AI reflections</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-label">Anthropic API key</div>
+            <div class="settings-row-sub" id="keyStatusSub">Not set — reflections disabled</div>
+          </div>
+          <button class="settings-row-action" onclick="openKeyModal()">Update</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Account</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-label" id="settingsUserName">—</div>
+            <div class="settings-row-sub" id="settingsUserEmail">—</div>
+          </div>
+          <button class="settings-row-action" onclick="signOut()">Sign out</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Data</div>
+        <div class="delete-zone">
+          <div class="delete-zone-title">Delete account and all data</div>
+          <div class="delete-zone-body">This permanently deletes your account, every entry you've ever logged, and your stored API key. This cannot be undone.</div>
+          <button class="btn-danger" onclick="showDeleteModal()">Delete my account and all data</button>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 </div>
 
-<!-- API Key Modal (update key) -->
+<!-- API Key update modal -->
 <div class="modal-overlay" id="apiKeyModal">
   <div class="modal-card">
-    <div class="modal-title">API Key Settings</div>
-    <div class="modal-body">Update or remove your Anthropic API key. Your key is stored only in this browser and sent directly to Anthropic when you request a reflection.</div>
+    <div class="modal-title">API Key</div>
+    <div class="modal-body">Your key is encrypted and stored against your account — it syncs to every device you log in from.</div>
     <div class="apikey-input-wrap" style="margin-bottom:12px">
       <input type="password" class="apikey-input" id="apiKeyModalInput" placeholder="sk-ant-api03-…">
-      <button class="apikey-toggle" onclick="toggleModalKeyVisibility()">
+      <button class="apikey-toggle" onclick="toggleKeyVis('apiKeyModalInput')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
     <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeApiKeyModal()">Cancel</button>
+      <button class="btn-ghost" onclick="closeKeyModal()">Cancel</button>
       <button class="btn-primary" onclick="updateApiKey()" style="margin-top:0">Save key</button>
     </div>
     <button class="apikey-skip" onclick="removeApiKey()" style="margin-top:16px;color:var(--rose)">Remove key and disable AI</button>
+  </div>
+</div>
+
+<!-- Delete account modal -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal-card">
+    <div class="modal-title" style="color:var(--rose)">Delete everything</div>
+    <div class="modal-body">This will permanently delete your account, all logged entries, and your stored API key. There is no undo. To confirm, type <strong>DELETE</strong> below.</div>
+    <input type="text" class="modal-input" id="deleteConfirmInput" placeholder="Type DELETE to confirm" oninput="checkDeleteConfirm()">
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-primary" id="deleteConfirmBtn" onclick="deleteAccount()" style="margin-top:0;background:var(--rose);box-shadow:none;opacity:0.4;pointer-events:none">Delete everything</button>
+    </div>
   </div>
 </div>
 
@@ -554,31 +668,43 @@ input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 const SUPABASE_URL='https://cjqdbzeqcvimieqqtipd.supabase.co';
 const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqcWRiemVxY3ZpbWllcXF0aXBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2NDQ5NzgsImV4cCI6MjA5MTIyMDk3OH0.YvKdPIPBW9VDSge39v53DUjgGG6Qz7693KlYmoBEuFA';
 
-// ── Locked system prompt — cannot be overridden by users ──
-const IBD_SYSTEM_PROMPT=`You are the voice of "I'll Be There" — a warm, honest, deeply human health companion for someone living with inflammatory bowel disease (IBD), specifically Crohn's disease or ulcerative colitis.
+// ── Locked IBD system prompt ──────────────────────────
+const IBD_SYSTEM_PROMPT=`You are the voice of "I'll Be There" — a warm, honest health companion for someone living with inflammatory bowel disease (Crohn's disease or ulcerative colitis).
 
-YOUR SOLE PURPOSE is to help the user understand their IBD symptoms, food triggers, emotional wellbeing, and day-to-day experience of living with a chronic gut condition. You reflect back logged data with warmth and clinical awareness.
+Your sole purpose is to help the user understand their IBD symptoms, food triggers, emotional wellbeing, and day-to-day experience of chronic gut illness.
 
-STRICT BOUNDARIES — you must refuse any request outside this purpose:
-- Do not answer general knowledge questions unrelated to IBD or gut health
-- Do not write code, essays, poems, or any content unrelated to the user's health
-- Do not roleplay as any other assistant or persona
-- Do not provide specific medication dosing advice or replace clinical consultation
-- If asked anything outside IBD health support, respond warmly but firmly: "I'm here specifically to support your IBD journey — I'm not able to help with that, but I'm here if you want to talk about how you're feeling or what you've noticed today."
+Strict boundaries:
+- Only respond to topics relating to IBD, gut health, symptoms, food, mood, and the emotional experience of chronic illness
+- If asked anything else, respond warmly but briefly: "I'm here specifically for your IBD journey — I can't help with that, but I'm here if you want to talk about how you're feeling."
+- Never provide specific medication dosing or replace clinical advice
+- Always position insights as support for better conversations with their clinical team
 
-YOUR VOICE:
-- Warm, honest, calm — like a trusted friend who deeply understands IBD
-- Never hollow or generic — always specific to what the person has shared
-- Acknowledge emotional reality alongside physical data
-- Never alarmist, never dismissive
-- When something warrants clinical attention, say so clearly but calmly
-- Always respect that the person knows their own body
+Your voice:
+- Warm, honest, and direct — like a trusted friend who deeply understands IBD
+- Specific to what the person has shared, never generic
+- Acknowledge the emotional reality alongside the physical data
+- Plain prose only — no bullet points, no headers, no bold text, no asterisks or markdown
+- 3 to 5 sentences for daily reflections, 4 to 6 for weekly
+- End with something that feels like a quiet, steadying hand`;
 
-NEVER replace a gastroenterologist. Always position your reflections as personal insight to help the user have better conversations with their clinical team.`;
+// ── Markdown stripper ─────────────────────────────────
+function stripMarkdown(text){
+  return text
+    .replace(/\*\*([^*]+)\*\*/g,'$1')
+    .replace(/\*([^*]+)\*/g,'$1')
+    .replace(/#{1,6}\s/g,'')
+    .replace(/`([^`]+)`/g,'$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+    .replace(/^[-*+]\s/gm,'')
+    .replace(/^\d+\.\s/gm,'')
+    .trim();
+}
 
 // ── Supabase helpers ──────────────────────────────────
 let currentSession=null;
 let currentUserId=null;
+let currentUserEmail=null;
+let currentUserName=null;
 
 async function sbFetch(path,opts={}){
   const headers={
@@ -597,11 +723,10 @@ async function sbFetch(path,opts={}){
 async function getSession(){
   const hash=window.location.hash;
   if(hash.includes('access_token')){
-    const params=new URLSearchParams(hash.slice(1));
-    const access_token=params.get('access_token');
-    const refresh_token=params.get('refresh_token');
-    if(access_token){
-      currentSession={access_token,refresh_token};
+    const p=new URLSearchParams(hash.slice(1));
+    const at=p.get('access_token'),rt=p.get('refresh_token');
+    if(at){
+      currentSession={access_token:at,refresh_token:rt};
       localStorage.setItem('ibt_session',JSON.stringify(currentSession));
       window.history.replaceState(null,'',window.location.pathname);
       return currentSession;
@@ -611,22 +736,11 @@ async function getSession(){
   if(stored){
     try{
       const s=JSON.parse(stored);
-      const res=await fetch(SUPABASE_URL+'/auth/v1/user',{
-        headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+s.access_token}
-      });
+      const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+s.access_token}});
       if(res.ok){currentSession=s;return s;}
       if(s.refresh_token){
-        const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{
-          method:'POST',
-          headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON},
-          body:JSON.stringify({refresh_token:s.refresh_token})
-        });
-        if(r.ok){
-          const ns=await r.json();
-          currentSession={access_token:ns.access_token,refresh_token:ns.refresh_token};
-          localStorage.setItem('ibt_session',JSON.stringify(currentSession));
-          return currentSession;
-        }
+        const r=await fetch(SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON},body:JSON.stringify({refresh_token:s.refresh_token})});
+        if(r.ok){const ns=await r.json();currentSession={access_token:ns.access_token,refresh_token:ns.refresh_token};localStorage.setItem('ibt_session',JSON.stringify(currentSession));return currentSession;}
       }
     }catch(e){}
     localStorage.removeItem('ibt_session');
@@ -637,9 +751,7 @@ async function getSession(){
 async function getUser(){
   if(!currentSession)return null;
   try{
-    const res=await fetch(SUPABASE_URL+'/auth/v1/user',{
-      headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+currentSession.access_token}
-    });
+    const res=await fetch(SUPABASE_URL+'/auth/v1/user',{headers:{'apikey':SUPABASE_ANON,'Authorization':'Bearer '+currentSession.access_token}});
     if(res.ok)return await res.json();
   }catch(e){}
   return null;
@@ -658,72 +770,141 @@ async function signOut(){
   document.getElementById('authScreen').style.display='flex';
 }
 
-// ── API Key management ────────────────────────────────
+// ── API Key — stored in Supabase user_metadata ────────
+// We store it in a simple profile table so it syncs across devices
+async function loadApiKeyFromCloud(){
+  if(!currentSession)return null;
+  try{
+    const rows=await sbFetch(`/rest/v1/profiles?user_id=eq.${currentUserId}&select=api_key`);
+    if(rows&&rows.length&&rows[0].api_key){
+      localStorage.setItem('ibt_api_key',rows[0].api_key);
+      return rows[0].api_key;
+    }
+  }catch(e){}
+  return localStorage.getItem('ibt_api_key')||null;
+}
+
+async function saveApiKeyToCloud(key){
+  if(!currentSession||!currentUserId)return;
+  try{
+    await sbFetch('/rest/v1/profiles',{
+      method:'POST',
+      headers:{'Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({user_id:currentUserId,api_key:key,updated_at:new Date().toISOString()})
+    });
+  }catch(e){console.warn('Could not save key to cloud',e);}
+}
+
+async function removeApiKeyFromCloud(){
+  if(!currentSession||!currentUserId)return;
+  try{
+    await sbFetch('/rest/v1/profiles',{
+      method:'POST',
+      headers:{'Prefer':'resolution=merge-duplicates'},
+      body:JSON.stringify({user_id:currentUserId,api_key:null,updated_at:new Date().toISOString()})
+    });
+  }catch(e){}
+}
+
 function getApiKey(){return localStorage.getItem('ibt_api_key')||'';}
 function hasApiKey(){return!!getApiKey();}
 
 function updateAiStatusChip(){
   const dot=document.getElementById('aiStatusDot');
   const text=document.getElementById('aiStatusText');
+  const sub=document.getElementById('keyStatusSub');
   if(hasApiKey()){
     dot.className='ai-status-dot';
     text.textContent='AI reflections active';
+    if(sub)sub.textContent='Key saved — reflections enabled';
   }else{
     dot.className='ai-status-dot missing';
     text.textContent='Add API key for reflections';
+    if(sub)sub.textContent='Not set — reflections disabled';
   }
 }
 
-function saveApiKey(){
+async function saveApiKey(){
   const val=document.getElementById('apiKeyInput').value.trim();
   if(!val||!val.startsWith('sk-ant')){showToast('Please enter a valid Anthropic key');return;}
   localStorage.setItem('ibt_api_key',val);
+  await saveApiKeyToCloud(val);
   document.getElementById('apiKeyScreen').style.display='none';
   document.getElementById('appShell').style.display='block';
   updateAiStatusChip();
   showToast('API key saved');
+  initApp();
 }
 
 function skipApiKey(){
   document.getElementById('apiKeyScreen').style.display='none';
   document.getElementById('appShell').style.display='block';
   updateAiStatusChip();
+  initApp();
 }
 
-function showApiKeyModal(){
-  const existing=getApiKey();
-  document.getElementById('apiKeyModalInput').value=existing;
+function openKeyModal(){
+  document.getElementById('apiKeyModalInput').value=getApiKey();
   document.getElementById('apiKeyModal').classList.add('visible');
 }
+function closeKeyModal(){document.getElementById('apiKeyModal').classList.remove('visible');}
 
-function closeApiKeyModal(){
-  document.getElementById('apiKeyModal').classList.remove('visible');
-}
-
-function updateApiKey(){
+async function updateApiKey(){
   const val=document.getElementById('apiKeyModalInput').value.trim();
   if(!val||!val.startsWith('sk-ant')){showToast('Please enter a valid Anthropic key');return;}
   localStorage.setItem('ibt_api_key',val);
-  closeApiKeyModal();
-  updateAiStatusChip();
-  showToast('API key updated');
+  await saveApiKeyToCloud(val);
+  closeKeyModal();updateAiStatusChip();showToast('API key updated');
 }
 
-function removeApiKey(){
+async function removeApiKey(){
   localStorage.removeItem('ibt_api_key');
-  closeApiKeyModal();
-  updateAiStatusChip();
-  showToast('API key removed');
+  await removeApiKeyFromCloud();
+  closeKeyModal();updateAiStatusChip();showToast('API key removed');
 }
 
-function toggleKeyVisibility(){
-  const inp=document.getElementById('apiKeyInput');
+function toggleKeyVis(id){
+  const inp=document.getElementById(id);
   inp.type=inp.type==='password'?'text':'password';
 }
 
-function toggleModalKeyVisibility(){
-  const inp=document.getElementById('apiKeyModalInput');
-  inp.type=inp.type==='password'?'text':'password';
+// ── Delete account ────────────────────────────────────
+function showDeleteModal(){
+  document.getElementById('deleteConfirmInput').value='';
+  checkDeleteConfirm();
+  document.getElementById('deleteModal').classList.add('visible');
+}
+function closeDeleteModal(){document.getElementById('deleteModal').classList.remove('visible');}
+
+function checkDeleteConfirm(){
+  const val=document.getElementById('deleteConfirmInput').value;
+  const btn=document.getElementById('deleteConfirmBtn');
+  const ok=val==='DELETE';
+  btn.style.opacity=ok?'1':'0.4';
+  btn.style.pointerEvents=ok?'all':'none';
+}
+
+async function deleteAccount(){
+  if(document.getElementById('deleteConfirmInput').value!=='DELETE')return;
+  closeDeleteModal();
+  showToast('Deleting your account…');
+  try{
+    // Delete all entries
+    await sbFetch(`/rest/v1/entries?user_id=eq.${currentUserId}`,{method:'DELETE'});
+    // Delete profile
+    await sbFetch(`/rest/v1/profiles?user_id=eq.${currentUserId}`,{method:'DELETE'});
+    // Clear local storage
+    Object.keys(localStorage).forEach(k=>{if(k.startsWith('ibt_'))localStorage.removeItem(k);});
+    // Delete auth user via Supabase admin — uses current user token
+    await sbFetch('/auth/v1/user',{method:'DELETE'});
+  }catch(e){console.warn('Delete error',e);}
+  currentSession=null;currentUserId=null;
+  localStorage.clear();
+  showToast('Account deleted');
+  setTimeout(()=>{
+    document.getElementById('appShell').style.display='none';
+    document.getElementById('authScreen').style.display='flex';
+  },1500);
 }
 
 // ── Data sync ─────────────────────────────────────────
@@ -736,34 +917,28 @@ async function syncToCloud(date,data){
     await sbFetch('/rest/v1/entries',{
       method:'POST',
       headers:{'Prefer':'resolution=merge-duplicates'},
-      body:JSON.stringify({
-        user_id:currentUserId,
-        date,
-        data,
-        updated_at:new Date().toISOString()
-      })
+      body:JSON.stringify({user_id:currentUserId,date,data,updated_at:new Date().toISOString()})
     });
     setSyncStatus('synced');
-  }catch(e){
-    console.error('Sync error:',e);
-    setSyncStatus('error');
-  }
+  }catch(e){setSyncStatus('error');}
 }
 
 async function saveEntry(date,data){
+  // Always write cloud first for sync reliability, then update local
   localCache[date]=data;
   localStorage.setItem('ibt_'+date,JSON.stringify(data));
   clearTimeout(syncTimer);
   setSyncStatus('syncing');
-  syncTimer=setTimeout(()=>syncToCloud(date,data),1200);
+  syncTimer=setTimeout(()=>syncToCloud(date,data),800);
 }
 
 async function fetchCloudEntry(date){
   if(!currentSession)return null;
   try{
-    const rows=await sbFetch(`/rest/v1/entries?date=eq.${date}&select=data`);
+    const rows=await sbFetch(`/rest/v1/entries?date=eq.${date}&select=data,updated_at`);
     if(rows&&rows.length){
       const d=rows[0].data;
+      // Cloud is source of truth — always overwrite local
       localCache[date]=d;
       localStorage.setItem('ibt_'+date,JSON.stringify(d));
       return d;
@@ -773,22 +948,44 @@ async function fetchCloudEntry(date){
 }
 
 async function loadEntryWithCloud(date){
+  // Always fetch fresh from cloud when possible
   const cloud=await fetchCloudEntry(date);
   if(cloud)return cloud;
   if(localCache[date])return localCache[date];
   const ls=localStorage.getItem('ibt_'+date);
-  if(ls){try{return JSON.parse(ls);}catch(e){}}
+  if(ls){try{const d=JSON.parse(ls);localCache[date]=d;return d;}catch(e){}}
   return null;
 }
 
+async function manualRefresh(){
+  const btn=document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  setSyncStatus('syncing');
+  // Clear cache for today and reload
+  const today=realTodayKey();
+  delete localCache[today];
+  await loadStateForDate(today);
+  syncTabsToDate();
+  updateToday();
+  btn.classList.remove('spinning');
+  setSyncStatus('synced');
+  showToast('Refreshed from cloud');
+}
+
 function setSyncStatus(status){
-  const dot=document.getElementById('syncDot');
+  ['syncDot','topSyncDot'].forEach(id=>{
+    const dot=document.getElementById(id);
+    if(!dot)return;
+    dot.className='sync-dot';
+    if(status==='syncing')dot.classList.add('syncing');
+    else if(status==='error')dot.classList.add('error');
+  });
   const text=document.getElementById('syncText');
-  if(!dot)return;
-  dot.className='sync-dot';
-  if(status==='syncing'){dot.classList.add('syncing');text.textContent='Saving…';}
-  else if(status==='error'){dot.classList.add('error');text.textContent='Sync error';}
-  else{text.textContent='Synced';}
+  if(text){
+    if(status==='syncing')text.textContent='Saving…';
+    else if(status==='error')text.textContent='Sync error';
+    else text.textContent='Synced';
+  }
 }
 
 // ── App data ──────────────────────────────────────────
@@ -837,52 +1034,72 @@ let weekOffset=0;
 let state={bristol:null,bristolNotes:'',symptoms:[],severity:5,symptomNotes:'',meals:[],mood:null,anxiety:3,feelingsNotes:'',reflection:null};
 function isViewingToday(){return viewingDate===realTodayKey();}
 
+// ── Drawer ────────────────────────────────────────────
+function openDrawer(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 // ── Boot ──────────────────────────────────────────────
 async function boot(){
-  // Fix PWA 404: if launched from home screen at root, redirect to this file
   if(window.location.pathname==='/'){
-    window.location.replace('./ill-be-there.html');
-    return;
+    window.location.replace('./ill-be-there.html');return;
   }
-
   const session=await getSession();
   document.getElementById('loadingScreen').style.display='none';
-
-  if(!session){
-    document.getElementById('authScreen').style.display='flex';
-    return;
-  }
-
+  if(!session){document.getElementById('authScreen').style.display='flex';return;}
   const user=await getUser();
   if(user){
     currentUserId=user.id;
-    const name=user.user_metadata?.full_name||user.email||'You';
-    document.getElementById('userName').textContent=name.split(' ')[0];
+    currentUserEmail=user.email||'';
+    currentUserName=user.user_metadata?.full_name||user.email||'You';
+    document.getElementById('userName').textContent=currentUserName.split(' ')[0];
+    document.getElementById('settingsUserName').textContent=currentUserName;
+    document.getElementById('settingsUserEmail').textContent=currentUserEmail;
     const avatar=user.user_metadata?.avatar_url;
     if(avatar){
-      const img=document.createElement('img');
-      img.src=avatar;img.className='user-avatar';
+      const img=document.createElement('img');img.src=avatar;img.className='user-avatar';
       document.getElementById('userAvatarWrap').replaceWith(img);
     }
   }
+  // Load API key from cloud (syncs across devices)
+  const cloudKey=await loadApiKeyFromCloud();
+  if(cloudKey)localStorage.setItem('ibt_api_key',cloudKey);
 
-  // Check if API key has been set up before
-  const apiKeySetupDone=localStorage.getItem('ibt_api_setup_done');
-  if(!apiKeySetupDone){
+  const setupDone=localStorage.getItem('ibt_api_setup_done');
+  if(!setupDone){
     localStorage.setItem('ibt_api_setup_done','1');
-    document.getElementById('apiKeyScreen').style.display='flex';
-  } else {
-    document.getElementById('appShell').style.display='block';
+    if(!hasApiKey()){
+      document.getElementById('apiKeyScreen').style.display='flex';
+      return;
+    }
   }
+  document.getElementById('appShell').style.display='block';
+  initApp();
+}
 
+async function initApp(){
   buildBristol();buildSymptoms();buildMoods();
   setDate();updateAiStatusChip();
+  // Create profiles table if needed — run once
+  await ensureProfilesTable();
   await loadStateForDate(viewingDate);
   renderMeals();renderWeek();updateToday();updateDayNav();
-
   document.getElementById('mealInput').addEventListener('keydown',e=>{
     if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();addMeal();}
   });
+}
+
+async function ensureProfilesTable(){
+  // Try a read — if it fails the table doesn't exist yet, that's fine
+  // Table is created via SQL editor, this is just defensive
+  try{await sbFetch(`/rest/v1/profiles?user_id=eq.${currentUserId}&select=user_id`);}catch(e){}
 }
 
 function setDate(){
@@ -893,8 +1110,7 @@ function setDate(){
 function buildBristol(){
   document.getElementById('bristolGrid').innerHTML=bristolData.map(b=>`
     <div class="bristol-item" onclick="selectBristol(${b.n})" id="bristol-${b.n}">
-      <div class="bristol-num">${b.n===0?'—':b.n}</div>
-      ${bristolShapes[b.n]}
+      <div class="bristol-num">${b.n===0?'—':b.n}</div>${bristolShapes[b.n]}
       <div class="bristol-desc">${b.label}</div>
     </div>`).join('');
 }
@@ -906,13 +1122,26 @@ function buildMoods(){
   document.getElementById('moodRow').innerHTML=moods.map(m=>`
     <div class="mood-item" onclick="selectMood('${m.k}',this)" id="mood-${m.k}">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="${m.p}"/>
-        <line x1="8" y1="9" x2="8.01" y2="9"/>
-        <line x1="16" y1="9" x2="16.01" y2="9"/>
+        <circle cx="12" cy="12" r="10"/><path d="${m.p}"/>
+        <line x1="8" y1="9" x2="8.01" y2="9"/><line x1="16" y1="9" x2="16.01" y2="9"/>
       </svg>
       <div class="mood-label">${m.l}</div>
     </div>`).join('');
+}
+
+// ── Navigation ────────────────────────────────────────
+function navTo(name){
+  showPanel(name);closeDrawer();
+}
+
+function showPanel(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='today'){updateDayNav();updateToday();}
+  if(['food','bristol','symptoms','feelings'].includes(name))setReadonly(!isViewingToday());
+  if(name==='week')renderWeek();
 }
 
 // ── Date nav ──────────────────────────────────────────
@@ -937,20 +1166,14 @@ function updateDayNav(){
 }
 
 async function shiftDay(dir){
-  const d=new Date(viewingDate+'T12:00:00');
-  d.setDate(d.getDate()+dir);
+  const d=new Date(viewingDate+'T12:00:00');d.setDate(d.getDate()+dir);
   const k=d.toISOString().slice(0,10);
   if(k>realTodayKey())return;
-  viewingDate=k;
-  await loadStateForDate(viewingDate);
-  updateDayNav();updateToday();syncTabsToDate();
+  viewingDate=k;await loadStateForDate(viewingDate);updateDayNav();updateToday();syncTabsToDate();
 }
-
 async function pickDay(val){
   if(!val||val>realTodayKey())return;
-  viewingDate=val;
-  await loadStateForDate(viewingDate);
-  updateDayNav();updateToday();syncTabsToDate();
+  viewingDate=val;await loadStateForDate(viewingDate);updateDayNav();updateToday();syncTabsToDate();
 }
 
 function syncTabsToDate(){
@@ -981,6 +1204,8 @@ function setReadonly(r){
 // ── Persistence ───────────────────────────────────────
 async function loadStateForDate(date){
   state={bristol:null,bristolNotes:'',symptoms:[],severity:5,symptomNotes:'',meals:[],mood:null,anxiety:3,feelingsNotes:'',reflection:null};
+  // Always prefer cloud — delete cache to force fresh fetch
+  delete localCache[date];
   const data=await loadEntryWithCloud(date);
   if(data)state={...state,...data};
 }
@@ -995,17 +1220,6 @@ async function loadDay(k){
   const ls=localStorage.getItem('ibt_'+k);
   if(ls){try{const d=JSON.parse(ls);localCache[k]=d;return d;}catch(e){}}
   return await fetchCloudEntry(k);
-}
-
-// ── Navigation ────────────────────────────────────────
-function showPanel(name){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  document.getElementById('tab-'+name).classList.add('active');
-  if(name==='today'){updateDayNav();updateToday();}
-  if(['food','bristol','symptoms','feelings'].includes(name))setReadonly(!isViewingToday());
-  if(name==='week')renderWeek();
 }
 
 // ── Trackers ──────────────────────────────────────────
@@ -1036,13 +1250,6 @@ function updateAnx(v){document.getElementById('anxVal').textContent=v;state.anxi
 async function saveFeelings(){state.feelingsNotes=document.getElementById('feelingsNotes').value;await saveState();showToast('Feelings saved');updateToday();}
 
 // ── Today panel ───────────────────────────────────────
-function noAiNotice(){
-  return`<div class="no-ai-notice">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <div class="no-ai-notice-text"><strong>AI reflections need an API key.</strong> <button class="no-ai-notice-link" onclick="showApiKeyModal()">Add your Anthropic key</button> to unlock daily and weekly reflections.</div>
-  </div>`;
-}
-
 function updateToday(){
   const content=document.getElementById('todayContent');
   const reflBtn=document.getElementById('reflBtn');
@@ -1055,9 +1262,9 @@ function updateToday(){
   const hasData=state.bristol!==null||state.symptoms.length||state.meals.length||state.mood;
 
   if(!hasData){
-    content.innerHTML=`<div class="summary-empty"><svg class="empty-icon" viewBox="0 0 64 64" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round"><circle cx="32" cy="32" r="28"/><path d="M20 38s3-4 12-4 12 4 12 4" opacity="0.4"/><circle cx="22" cy="26" r="2" fill="#C4A882"/><circle cx="42" cy="26" r="2" fill="#C4A882"/></svg><div class="empty-text">${isPast?'Nothing was logged on this day.':'Nothing logged today yet.<br>Use the tabs to start building your picture.'}</div></div>`;
+    content.innerHTML=`<div class="summary-empty"><svg class="empty-icon" viewBox="0 0 64 64" fill="none" stroke="#C4A882" stroke-width="1.5" stroke-linecap="round"><circle cx="32" cy="32" r="28"/><path d="M20 38s3-4 12-4 12 4 12 4" opacity="0.4"/><circle cx="22" cy="26" r="2" fill="#C4A882"/><circle cx="42" cy="26" r="2" fill="#C4A882"/></svg><div class="empty-text">${isPast?'Nothing was logged on this day.':'Nothing logged today yet.<br>Use the menu to start building your picture.'}</div></div>`;
     reflBtn.style.display='none';reflCard.style.display='none';
-    sub.textContent=isPast?'No entries for this date.':'Log across the tabs and come back here for your daily picture.';
+    sub.textContent=isPast?'No entries for this date.':'Log across the menu and come back here for your daily picture.';
     return;
   }
 
@@ -1073,12 +1280,12 @@ function updateToday(){
     reflBtn.style.display='none';reflCard.style.display='block';
     document.getElementById('reflContent').innerHTML=`<div class="reflection-text">${state.reflection}</div>`;
   }else if(isViewingToday()&&hasData){
-    if(!hasApiKey()){content.innerHTML+=noAiNotice();reflBtn.style.display='none';}
-    else{reflBtn.style.display='block';}
+    if(!hasApiKey()){
+      content.innerHTML+=`<div class="no-ai-notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex-shrink:0;opacity:0.6;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div class="no-ai-notice-text">AI reflections need an API key. <button class="no-ai-link" onclick="navTo('settings')">Add your key in Settings.</button></div></div>`;
+      reflBtn.style.display='none';
+    }else{reflBtn.style.display='block';}
     reflCard.style.display='none';
-  }else{
-    reflBtn.style.display='none';reflCard.style.display='none';
-  }
+  }else{reflBtn.style.display='none';reflCard.style.display='none';}
 }
 
 // ── Weekly wrap ───────────────────────────────────────
@@ -1121,7 +1328,7 @@ async function renderWeek(){
   document.getElementById('weekChartLabels').innerHTML=week.map(w=>`<span>${w.dayName}</span>`).join('');
 }
 
-// ── AI Reflections ────────────────────────────────────
+// ── AI calls ──────────────────────────────────────────
 async function callAI(userContent,maxTokens=1000){
   const key=getApiKey();
   if(!key)throw new Error('no_key');
@@ -1141,12 +1348,12 @@ async function callAI(userContent,maxTokens=1000){
     })
   });
   if(!res.ok){
-    const e=await res.json();
+    const e=await res.json().catch(()=>({}));
     if(res.status===401)throw new Error('invalid_key');
     throw new Error(e.error?.message||'api_error');
   }
   const data=await res.json();
-  return data.content?.[0]?.text||'';
+  return stripMarkdown(data.content?.[0]?.text||'');
 }
 
 async function getReflection(){
@@ -1154,23 +1361,22 @@ async function getReflection(){
   btn.style.display='none';card.style.display='block';
   cont.innerHTML=`<div class="loading-pulse"><div class="dots"><span></span><span></span><span></span></div>Thinking about your day…</div>`;
   try{
-    const text=await callAI(`Here is what I've logged today:\n\n${buildPrompt()}\n\nPlease give me my daily reflection.`);
+    const text=await callAI(`Here is what I logged today:\n\n${buildPrompt()}\n\nPlease give me my daily reflection.`);
     state.reflection=text;await saveState();
     cont.innerHTML=`<div class="reflection-text">${text}</div>`;
   }catch(e){
-    if(e.message==='no_key'){cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Add an API key to unlock reflections.</div>`;}
-    else if(e.message==='invalid_key'){cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Your API key doesn't seem to be valid — check it in settings.</div>`;}
-    else{cont.innerHTML=`<div class="reflection-text" style="opacity:0.6">Couldn't connect right now — try again in a moment.</div>`;}
+    const msg=e.message==='no_key'?'Add an API key in Settings to unlock reflections.':e.message==='invalid_key'?'Your API key looks invalid — check it in Settings.':'Couldn\'t connect right now — try again in a moment.';
+    cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">${msg}</div>`;
     btn.style.display='block';card.style.display='none';
   }
 }
 
 function buildPrompt(){
   const p=[];
-  if(state.meals.length)p.push(`Food today: ${state.meals.map(m=>m.text).join('; ')}`);
-  if(state.bristol!==null)p.push(`Bristol: ${bristolNames[state.bristol]}${state.bristolNotes?'. '+state.bristolNotes:''}`);
-  if(state.symptoms.length)p.push(`Symptoms: ${state.symptoms.join(', ')}${state.symptoms.some(s=>s!=='No symptoms')?`. Intensity: ${state.severity}/10`:''}${state.symptomNotes?'. '+state.symptomNotes:''}`);
-  if(state.mood)p.push(`Mood: ${state.mood}. Anxiety: ${state.anxiety}/10${state.feelingsNotes?`. "${state.feelingsNotes}"`:''}`);
+  if(state.meals.length)p.push(`Food: ${state.meals.map(m=>m.text).join('; ')}`);
+  if(state.bristol!==null)p.push(`Bristol stool type: ${bristolNames[state.bristol]}${state.bristolNotes?'. '+state.bristolNotes:''}`);
+  if(state.symptoms.length)p.push(`Symptoms: ${state.symptoms.join(', ')}${state.symptoms.some(s=>s!=='No symptoms')?`. Intensity ${state.severity}/10`:''}${state.symptomNotes?'. '+state.symptomNotes:''}`);
+  if(state.mood)p.push(`Mood: ${state.mood}. Anxiety ${state.anxiety}/10${state.feelingsNotes?'. They wrote: "'+state.feelingsNotes+'"':''}`);
   return p.join('\n');
 }
 
@@ -1178,8 +1384,7 @@ async function getWeekReflection(){
   const card=document.getElementById('weekReflCard'),btn=document.getElementById('weekReflBtn'),cont=document.getElementById('weekReflContent');
   if(!hasApiKey()){
     btn.style.display='none';card.style.display='block';
-    cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Add an API key to unlock weekly reflections. <button class="no-ai-notice-link" onclick="showApiKeyModal()">Add key</button></div>`;
-    return;
+    cont.innerHTML=`<div class="reflection-text" style="opacity:0.7">Add an API key in Settings to unlock weekly reflections.</div>`;return;
   }
   btn.style.display='none';card.style.display='block';
   cont.innerHTML=`<div class="loading-pulse"><div class="dots"><span></span><span></span><span></span></div>Looking across your week…</div>`;
@@ -1198,7 +1403,7 @@ async function getWeekReflection(){
     if(d.meals?.length)p.push(`Food: ${d.meals.map(m=>m.text).join('; ')}`);
     if(d.bristol!=null)p.push(`Bristol: ${bristolNames[d.bristol]}`);
     if(d.symptoms?.length)p.push(`Symptoms: ${d.symptoms.join(', ')}${d.symptoms.some(s=>s!=='No symptoms')?`, intensity ${d.severity}/10`:''}`);
-    if(d.mood)p.push(`Mood: ${d.mood}, anxiety: ${d.anxiety}/10${d.feelingsNotes?`, "${d.feelingsNotes}"`:''}`);
+    if(d.mood)p.push(`Mood: ${d.mood}, anxiety ${d.anxiety}/10${d.feelingsNotes?`, "${d.feelingsNotes}"`:''}`);
     return`${w.day}:\n${p.join('\n')}`;
   }).join('\n\n');
   try{
